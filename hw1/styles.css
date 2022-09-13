@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
 html,
 body {
     margin: 0px;
     height: 100%;
+    font-family: "Roboto", sans-serif;
 }
 
 #root {
@@ -14,6 +17,7 @@ body {
     width: 65%;
     height: 90%;
     display: flex;
+    flex-direction: column;
     position: relative;
 }
 .func {
@@ -40,18 +44,16 @@ body {
     width: 35%;
     height: 90%;
     display: flex;
-    flex-direction: column;
-    vertical-align: middle;
-    align-items: center;
+    flex-direction: row;
+    align-content: center;
     justify-content: center;
-    row-gap: 10px;
-    column-gap: 0;
+    flex-wrap: wrap;
 }
 #bottom_wrapper {
     width: 100%;
-    bottom: 0;
+    height: 10%;
     display: flex; /* establish flex container */
-    justify-content: space-around; /* switched from default (flex-start, see below) */
+    justify-content: space-between; /* switched from default (flex-start, see below) */
 }
 #bottom_wrapper > div {
     width: 100%;
@@ -60,21 +62,22 @@ body {
 }
 #b_left {
     text-align: left;
+    display: flex;
+    justify-content: flex-start;
 }
 #b_mid {
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 #b_right {
     text-align: right;
-}
-#host {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .dot__host {
+    margin: auto;
     justify-content: center;
     align-items: center;
     border-radius: 100%;
@@ -83,7 +86,9 @@ body {
     background-color: #bbb;
     height: 300px;
     width: 300px;
-    background-color: gray;
+    background-color: rgba(215, 120, 36, 0.981);
+    font-size: 3vw;
+    color: aliceblue;
 }
 .row {
     justify-content: center;
@@ -92,7 +97,7 @@ body {
     flex-direction: row;
 }
 .container {
-    width: 180px;
+    width: 40%;
     height: 150px;
     background-color: gray;
     margin: 5px;
@@ -101,6 +106,7 @@ body {
     justify-content: center;
     display: flex;
     position: relative;
+    flex-direction: column;
 }
 
 .container .dot {
@@ -112,24 +118,26 @@ body {
     background-color: #bbb;
     height: 80px;
     width: 80px;
-    margin: 20px;
 }
 
-#container__last {
-    width: 200px;
-    height: 150px;
-    border: 1px solid gray;
-    background-color: gray;
-    margin: 5px;
-    border-radius: 15%;
-    align-items: center;
-    display: flex;
-    justify-content: center;
+.container .name {
+    position: absolute;
+    bottom: 5%;
+    left: 10%;
+    font-size: large;
+    color: aliceblue;
 }
 
 .mute {
     border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #5f6368;
+}
 
+#mute__host {
+    border-radius: 50%;
     position: absolute;
     top: 5px;
     right: 5px;
@@ -141,20 +149,25 @@ body {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    margin: 0.4vw;
+}
+
+.icon__right {
+    margin: 0.4vw;
 }
 
 .pin {
     border-radius: 50%;
     background-color: #5f6368;
-    position: absolute;
-    bottom: 5px;
-    left: 10px;
 }
 
-.pin__you {
+.left_corner {
     position: absolute;
-    bottom: 0px;
-    left: 70px;
+    bottom: 0vw;
+    left: 1vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
 }
 .tooltip {
     position: relative;
@@ -199,7 +212,7 @@ input[type="checkbox"]:checked + span {
     visibility: hidden;
 }
 
-img {
+img:not(.img__people) {
     -webkit-filter: invert(100%);
     filter: invert (100%);
 }
@@ -209,12 +222,10 @@ img {
     color: aliceblue;
 }
 
-h1 {
-    font-size: 5vw;
+.pin__you {
+    font-size: 18px;
     color: aliceblue;
-}
-
-#pin__you{
-    font-size: 20px;
-    color: aliceblue;
+    position: absolute;
+    align-self: center;
+    left: 8vw;
 }
