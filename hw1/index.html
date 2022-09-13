@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My First Web Page</title>
+        <link href="styles.css" rel="stylesheet" />
+        <link
+            rel="icon"
+            href="./images/favicon.jpeg"
+            sizes="20x20"
+            type="image/jpeg"
+        />
+    </head>
+    <body>
+        <div id="root" class="gm__root">
+            <div class="left_wrapper">
+                <div class="mute">
+                    <!-- <img src="./images/mute.png" width="40" height="40" /> -->
+                    <input class="icon" type="checkbox"  width="35" height="35"/>
+                </div>
+                <div class="dot__host" id="host">
+                    <img class="func" src="./images/func.png" height="50" width="150">
+                    <h1>你</h1>
+                </div>
+                
+                <div class="pin">
+                    <img src="./images/pin.png" width="40" height="40" />  
+                </div>
+                <p class="pin__you" id="pin__you">你</p>
+
+            </div>
+            <div id="right_wrapper" class="guest">
+                <div class="row">
+                    <div class="container">
+                        <div class="mute">
+                            <img src="./images/mute.png" width="25" height="25" />
+                        </div>
+                        <div class="dot">111</div>
+                    </div>
+                    <div class="container">
+                        <div class="mute">
+                            <img src="./images/mute.png" width="25" height="25" />
+                        </div>
+                        <div class="dot">222</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <div class="mute">
+                            <img src="./images/mute.png" width="25" height="25" />
+                        </div>
+                        <div class="dot">333</div>
+                    </div>
+                    <div class="container">
+                        <div class="mute">
+                            <img src="./images/mute.png" width="25" height="25" />
+                        </div>
+                        <div class="dot">444</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container" id="container__last">
+                        <div class="mute">
+                            <img src="./images/mute.png" width="25" height="25" />
+                        </div>
+                        <div class="dot">555</div>
+                    </div>
+                </div>
+            </div>
+            <footer id="bottom_wrapper">
+                <div id="b_left"><p id="time"> 凌晨12:53 | Web Programming</p></div>
+                <div id="b_mid">
+                    <div class="tooltip">
+                        <input class="icon" type="checkbox"  width="35" height="35"/>
+                        <span class="tooltiptext unmute" >Toggle Mute</span>
+                    </div>
+
+                    <div class="tooltip">
+                        <img class="icon" src="./images/no-video.png" width="35" height="35"/>
+                        <span class="tooltiptext">Stop video</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon" src="./images/hand.png" width="35" height="35"/>
+                        <span class="tooltiptext">Raise hand</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon" src="./images/present.png" width="35" height="35"/>
+                        <span class="tooltiptext">Start present</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon" src="./images/more.png" width="35" height="35"/>
+                        <span class="tooltiptext">More options</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon" src="./images/call.png" width="35" height="35"/>
+                        <span class="tooltiptext">End call</span>
+                    </div>    
+                </div>
+                <div id="b_right">
+                    <div class="tooltip">
+                        <img class="icon__right" src="./images/information.png" width="35" height="35" />
+                        <span class="tooltiptext">Meeting information</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon__right" src="./images/group.png" width="35" height="35" />
+                        <span class="tooltiptext">Show all participants</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon__right" src="./images/message.png" width="35" height="35" />
+                        <span class="tooltiptext">Message</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon__right" src="./images/shapes.png" width="35" height="35"/>
+                        <span class="tooltiptext">Activities</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon__right" src="./images/luggage.png" width="35" height="35"/>
+                        <span class="tooltiptext">Control panel</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

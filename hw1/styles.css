@@ -1,0 +1,220 @@
+html,
+body {
+    margin: 0px;
+    height: 100%;
+}
+
+#root {
+    background-color: #202124;
+    height: 100%;
+}
+.left_wrapper {
+    background: #202124;
+    float: left;
+    width: 65%;
+    height: 90%;
+    display: flex;
+    position: relative;
+}
+.func {
+    display: none;
+}
+.left_wrapper:hover .func {
+    display: inline;
+    position: absolute;
+    border-radius: 10%/50%;
+    background-color: antiquewhite;
+    opacity: 0.2;
+}
+.left_wrapper:hover .func:hover {
+    display: inline;
+    position: absolute;
+    border-radius: 10%/50%;
+    background-color: antiquewhite;
+    opacity: 0.6;
+}
+
+#right_wrapper {
+    background: #202124;
+    float: right;
+    width: 35%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+    column-gap: 0;
+}
+#bottom_wrapper {
+    width: 100%;
+    bottom: 0;
+    display: flex; /* establish flex container */
+    justify-content: space-around; /* switched from default (flex-start, see below) */
+}
+#bottom_wrapper > div {
+    width: 100%;
+    background-color: #202124;
+    margin: auto;
+}
+#b_left {
+    text-align: left;
+}
+#b_mid {
+    text-align: center;
+}
+#b_right {
+    text-align: right;
+}
+#host {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.dot__host {
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    text-align: center;
+    display: flex;
+    background-color: #bbb;
+    height: 300px;
+    width: 300px;
+    background-color: gray;
+}
+.row {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+.container {
+    width: 180px;
+    height: 150px;
+    background-color: gray;
+    margin: 5px;
+    border-radius: 15%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    position: relative;
+}
+
+.container .dot {
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    text-align: center;
+    display: flex;
+    background-color: #bbb;
+    height: 80px;
+    width: 80px;
+    margin: 20px;
+}
+
+#container__last {
+    width: 200px;
+    height: 150px;
+    border: 1px solid gray;
+    background-color: gray;
+    margin: 5px;
+    border-radius: 15%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.mute {
+    border-radius: 50%;
+
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.icon {
+    border-radius: 50%;
+    background-color: #5f6368;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.pin {
+    border-radius: 50%;
+    background-color: #5f6368;
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+}
+
+.pin__you {
+    position: absolute;
+    bottom: 0px;
+    left: 70px;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    margin-top: auto;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+input[type="checkbox"] {
+    -webkit-filter: invert(100%);
+    filter: invert (100%);
+    content: url("./images/mute.png");
+    width: 35px;
+    height: 35px;
+}
+
+input[type="checkbox"]:checked {
+    content: url("./images/microphone.png");
+}
+input[type="checkbox"]:checked + span {
+    visibility: hidden;
+}
+
+img {
+    -webkit-filter: invert(100%);
+    filter: invert (100%);
+}
+
+#time {
+    font-size: 1.5vw;
+    color: aliceblue;
+}
+
+h1 {
+    font-size: 5vw;
+    color: aliceblue;
+}
+
+#pin__you{
+    font-size: 20px;
+    color: aliceblue;
+}
