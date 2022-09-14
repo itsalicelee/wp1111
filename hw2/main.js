@@ -49,37 +49,74 @@ var unpinHost = function () {
             ele.style.height = "50%";
         });
     });
+    guestFuncButtons = document.getElementsByClassName("func__guest"); // html collections
 };
-bindRemoveGuest();
-unpinHost();
+
+var setHost = function () {
+    left_wrapper.style.display = "flex";
+    right_wrapper.style.width = "35%";
+    var container = document.querySelectorAll(".container");
+    console.log(container);
+    Array.from(container).forEach((ele) => {
+        ele.style.borderRadius = "15%";
+        ele.style.width = "40%";
+        ele.style.height = "20%";
+    });
+
+};
 // pin guest to main host
+var guestFuncButtons = document.getElementsByClassName("func__guest"); // html collections
 Array.from(guestFuncButtons).forEach((guestFuncButton) => {
     guestFuncButton.addEventListener("click", () => {
-        // save temp guest
-        var tempGuest = {
-            name: guestFuncButton.parentNode.lastElementChild.innerHTML,
-            src: guestFuncButton.parentNode.querySelector(".img__people").src,
-        };
-        // insert remove button if you are about to be the host
-        if (tempGuest.name === "You") {
-            var removeBtn_to_insert = document.createElement("div");
-            removeBtn_to_insert.className = "remove";
-            removeBtn_to_insert.innerHTML = `<img class="remove_button" src="./images/remove.png" width="25" height="25" />`;
-            guestFuncButton.parentNode.insertBefore(removeBtn_to_insert, guestFuncButton.parentNode.children[0]);
+        // pin the host  from together mode to normal mode and
+        if (left_wrapper.style.display === "none") {
+            setHost();
+            // save temp guest
+            var tempGuest = {
+                name: guestFuncButton.parentNode.lastElementChild.innerHTML,
+                src: guestFuncButton.parentNode.querySelector(".img__people").src,
+            };
+            console.log(tempGuest.src, tempGuest.name);
+            // assign temp guest to host
+            document.getElementById("img_host").src = tempGuest.src;
+            document.getElementById("pin_you").innerHTML = tempGuest.name;
+            // save current host
+            host.src = tempGuest.src;
+            host.name = tempGuest.name;
+            // remove duplicate guest
+            guestFuncButton.parentNode.remove();
         }
-        // assign host img and name to guest
-        guestFuncButton.parentNode.lastElementChild.innerHTML = host.name;
-        guestFuncButton.parentNode.querySelector(".img__people").src = host.src;
-        // assign temp guest to host
-        document.getElementById("img_host").src = tempGuest.src;
-        document.getElementById("pin_you").innerHTML = tempGuest.name;
-        // save current host
-        host.src = tempGuest.src;
-        host.name = tempGuest.name;
-        // // remove erase button if you are the guest
-        if (guestFuncButton.parentNode.lastElementChild.innerHTML === "You") {
-            guestFuncButton.parentNode.firstElementChild.remove();
+        // normal mode
+        else {
+            // save temp guest
+            var tempGuest = {
+                name: guestFuncButton.parentNode.lastElementChild.innerHTML,
+                src: guestFuncButton.parentNode.querySelector(".img__people").src,
+            };
+            // insert remove button to guest container if you are about to be the host
+            if (tempGuest.name === "You") {
+                var removeBtn_to_insert = document.createElement("div");
+                removeBtn_to_insert.className = "remove";
+                removeBtn_to_insert.innerHTML = `<img class="remove_button" src="./images/remove.png" width="25" height="25" />`;
+                guestFuncButton.parentNode.insertBefore(removeBtn_to_insert, guestFuncButton.parentNode.children[0]);
+            }
+            // assign host img and name to guest
+            guestFuncButton.parentNode.lastElementChild.innerHTML = host.name;
+            guestFuncButton.parentNode.querySelector(".img__people").src = host.src;
+            // assign temp guest to host
+            document.getElementById("img_host").src = tempGuest.src;
+            document.getElementById("pin_you").innerHTML = tempGuest.name;
+            // save current host
+            host.src = tempGuest.src;
+            host.name = tempGuest.name;
+            // // remove erase button if you are the guest
+            if (guestFuncButton.parentNode.lastElementChild.innerHTML === "You") {
+                guestFuncButton.parentNode.firstElementChild.remove();
+            }
+            bindRemoveGuest();
         }
-        bindRemoveGuest();
     });
 });
+
+bindRemoveGuest();
+unpinHost();
