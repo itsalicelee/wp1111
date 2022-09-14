@@ -5,6 +5,9 @@ var host = {
 
 var removeButtons = document.getElementsByClassName("remove_button"); // html collections
 var guestFuncButtons = document.getElementsByClassName("func__guest"); // html collections
+var hostFuncButton = document.getElementById("func_host");
+var left_wrapper = document.querySelector(".left_wrapper");
+var right_wrapper = document.querySelector(".right_wrapper");
 
 // remove guest container
 var bindRemoveGuest = function () {
@@ -14,7 +17,41 @@ var bindRemoveGuest = function () {
         });
     });
 };
+var addGuest = function (name, src) {
+    var container_to_insert = document.createElement("div");
+    container_to_insert.className = "container";
+    if (name !== "You") {
+        container_to_insert.innerHTML = `
+         <div id="remove_button1" class="remove">
+             <img class="remove_button" src="./images/remove.png" width="25" height="25" />
+         </div>`;
+    }
+    container_to_insert.innerHTML += `
+         <div class="mute">
+             <img class="inv" src="./images/mute.png" width="25" height="25" />
+         </div>
+         <img class="func__guest" src="./images/func_guest.png" height="30" width="90" />
+         <img class="img__people" src="${src}" width="50%" />
+         <span class="name">${name}</span>`;
+    right_wrapper.insertBefore(container_to_insert, right_wrapper.children[0]);
+};
 
+// unpin host
+var unpinHost = function () {
+    hostFuncButton.addEventListener("click", () => {
+        addGuest(host.name, host.src);
+        left_wrapper.style.display = "none";
+        right_wrapper.style.width = "100%";
+        var container = document.querySelectorAll(".container");
+        Array.from(container).forEach((ele) => {
+            ele.style.borderRadius = "5%";
+            ele.style.width = "30%";
+            ele.style.height = "50%";
+        });
+    });
+};
+bindRemoveGuest();
+unpinHost();
 // pin guest to main host
 Array.from(guestFuncButtons).forEach((guestFuncButton) => {
     guestFuncButton.addEventListener("click", () => {

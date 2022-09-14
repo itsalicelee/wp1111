@@ -16,7 +16,7 @@ body {
     float: left;
     width: 65%;
     height: 90%;
-    display: flex;
+    display: flex; /* if no host: none */
     flex-direction: column;
     position: relative;
 }
@@ -47,10 +47,10 @@ body {
 .container:hover .func__guest:hover {
     opacity: 0.8;
 }
-#right_wrapper {
+.right_wrapper {
     background: #202124;
     float: right;
-    width: 35%;
+    width: 35%; /* if no host: 100%*/
     height: 90%;
     display: flex;
     flex-direction: row;
@@ -58,7 +58,7 @@ body {
     justify-content: center;
     flex-wrap: wrap;
 }
-#bottom_wrapper {
+.bottom_wrapper {
     width: 100%;
     height: 10%;
     display: flex; /* establish flex container */
@@ -101,8 +101,8 @@ body {
     flex-direction: row;
 }
 .container {
-    width: 40%;
-    height: 150px;
+    width: 40%; /* if no host: 30% */
+    height: 20%; /* if no host: 50% */
     background-color: rgba(128, 128, 128, 0.309);
     margin: 5px;
     border-radius: 15%;
