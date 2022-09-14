@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Google Meet!</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+        <link rel="icon" href="./images/favicon.jpeg" sizes="20x20" type="image/jpeg" />
+    </head>
+    <body>
+        <div id="root" class="gm__root">
+            <!-- Left Wrapper-->
+            <div class="left_wrapper">
+                <div id="mute__host">
+                    <input class="icon" type="checkbox" width="35" height="35" />
+                </div>
+                <div class="dot__host">
+                    <img id="img_host" class="img__host" src="./images/profile0.png" width="80%" />
+                    <img class="func inv" src="./images/func.png" height="50" width="150" />
+                </div>
+
+                <div class="left_corner">
+                    <div class="pin">
+                        <img class="inv" src="./images/pin.png" width="40" height="40" />
+                    </div>
+                    <div id="pin_you" class="pin__you">
+                        <p>You</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Wrapper-->
+            <div id="right_wrapper" class="guest">
+                <div class="container">
+                    <div id="remove_button1" class="remove">
+                        <img class="remove_button" src="./images/remove.png" width="25" height="25" />
+                    </div>
+                    <div class="mute">
+                        <img class="inv" src="./images/mute.png" width="25" height="25" />
+                    </div>
+                    <img class="func__guest" src="./images/func_guest.png" height="30" width="90" />
+                    <img class="img__people" src="./images/profile1.png" width="50%" />
+                    <span class="name">Bob</span>
+                </div>
+                <div class="container">
+                    <div class="remove">
+                        <img class="remove_button" src="./images/remove.png" width="25" height="25" onclick="" />
+                    </div>
+                    <div class="mute">
+                        <img class="inv" src="./images/mute.png" width="25" height="25" />
+                    </div>
+                    <img class="func__guest" src="./images/func_guest.png" height="30" width="90" />
+                    <img class="img__people" src="./images/profile2.png" width="50%" />
+                    <span class="name">Cam</span>
+                </div>
+
+                <div class="container">
+                    <div class="remove">
+                        <img class="remove_button" src="./images/remove.png" width="25" height="25" />
+                    </div>
+                    <div class="mute">
+                        <img class="inv" src="./images/mute.png" width="25" height="25" />
+                    </div>
+                    <img class="func__guest" src="./images/func_guest.png" height="30" width="90" />
+                    <img class="img__people" src="./images/profile3.png" width="50%" />
+                    <span class="name">Denny</span>
+                </div>
+                <div class="container">
+                    <div class="remove">
+                        <img class="remove_button" src="./images/remove.png" width="25" height="25" />
+                    </div>
+                    <div class="mute">
+                        <img class="inv" src="./images/mute.png" width="25" height="25" />
+                    </div>
+                    <img class="func__guest" src="./images/func_guest.png" height="30" width="90" />
+                    <img class="img__people" src="./images/profile4.png" width="50%" />
+                    <span class="name">Ellen</span>
+                </div>
+
+                <div class="container">
+                    <div class="remove">
+                        <img class="remove_button" src="./images/remove.png" width="25" height="25" />
+                    </div>
+                    <div class="mute">
+                        <img class="inv" src="./images/mute.png" width="25" height="25" />
+                    </div>
+                    <img class="func__guest" src="./images/func_guest.png" height="30" width="90" />
+                    <img class="img__people" src="./images/profile5.png" width="50%" />
+                    <span class="name">Felix</span>
+                </div>
+            </div>
+            <!-- Bottom Wrapper-->
+            <footer id="bottom_wrapper">
+                <div id="b_left">
+                    <p id="time">12:53 PM | Web Programming</p>
+                </div>
+                <div id="b_mid">
+                    <div class="tooltip">
+                        <input class="icon" type="checkbox" width="35" height="35" />
+                        <span class="tooltiptext unmute">Toggle Mute</span>
+                    </div>
+
+                    <div class="tooltip">
+                        <img class="icon inv" src="./images/no-video.png" width="35" height="35" />
+                        <span class="tooltiptext">Stop video</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon inv" src="./images/hand.png" width="35" height="35" />
+                        <span class="tooltiptext">Raise hand</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon inv" src="./images/present.png" width="35" height="35" />
+                        <span class="tooltiptext">Start present</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon inv" src="./images/more.png" width="35" height="35" />
+                        <span class="tooltiptext">More options</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon inv" src="./images/call.png" width="35" height="35" />
+                        <span class="tooltiptext">End call</span>
+                    </div>
+                </div>
+                <div id="b_right">
+                    <div class="tooltip">
+                        <img class="icon__right inv" src="./images/information.png" width="35" height="35" />
+                        <span class="tooltiptext">Meeting information</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon__right inv" src="./images/group.png" width="35" height="35" />
+                        <span class="tooltiptext">Show all participants</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon__right inv" src="./images/message.png" width="35" height="35" />
+                        <span class="tooltiptext">Message</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon__right inv" src="./images/shapes.png" width="35" height="35" />
+                        <span class="tooltiptext">Activities</span>
+                    </div>
+                    <div class="tooltip">
+                        <img class="icon__right inv" src="./images/luggage.png" width="35" height="35" />
+                        <span class="tooltiptext">Control panel</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>
