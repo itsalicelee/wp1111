@@ -1,6 +1,7 @@
-var host = {
-    name: "You",
-    src: "./images/profile0.png",
+var env = {
+    host_name: "You",
+    host_src: "./images/profile0.png",
+    guestNum: 5,
 };
 /* append guest container dom in the right wrapper */
 function addGuest(name, src) {
@@ -28,7 +29,9 @@ function setHost(name, src) {
     var left_wrapper = document.querySelector(".left_wrapper");
     var right_wrapper = document.querySelector(".right_wrapper");
     left_wrapper.style.display = "flex";
+    left_wrapper.style.width = "65%";
     right_wrapper.style.width = "35%";
+
     var container = document.querySelectorAll(".container");
     Array.from(container).forEach((ele) => {
         ele.style.borderRadius = "15%";
@@ -37,8 +40,9 @@ function setHost(name, src) {
     });
     document.getElementById("img_host").src = src;
     document.getElementById("pin_you").innerHTML = name;
-    host.src = src;
-    host.name = name;
+    env.host_src = src;
+    env.host_name = name;
+    checkGuestNum(env.guestNum);
 }
 /* swap host and guest */
 function swapHostGuest(guestFuncButton) {
@@ -54,18 +58,30 @@ function swapHostGuest(guestFuncButton) {
         guestFuncButton.parentNode.insertBefore(removeBtn_to_insert, guestFuncButton.parentNode.children[0]);
     }
     // assign host img and name to guest
-    guestFuncButton.parentNode.lastElementChild.innerHTML = host.name;
-    guestFuncButton.parentNode.querySelector(".img__people").src = host.src;
+    guestFuncButton.parentNode.lastElementChild.innerHTML = env.host_name;
+    guestFuncButton.parentNode.querySelector(".img__people").src = env.host_src;
     // assign temp guest to host
     document.getElementById("img_host").src = tempGuest.src;
     document.getElementById("pin_you").innerHTML = tempGuest.name;
     // save current host
-    host.src = tempGuest.src;
-    host.name = tempGuest.name;
+    env.host_src = tempGuest.src;
+    env.host_name = tempGuest.name;
     // // remove erase button if you are the guest
     if (guestFuncButton.parentNode.lastElementChild.innerHTML === "You") {
         guestFuncButton.parentNode.firstElementChild.remove();
     }
 }
+/* set you to middle if there is no other guests*/
+function checkGuestNum(guestNum) {
+    var left_wrapper = document.querySelector(".left_wrapper");
+    var right_wrapper = document.querySelector(".right_wrapper");
+    if (guestNum === 0 && left_wrapper.style.display !== "none") {
+        right_wrapper.style.display = "none";
+        left_wrapper.style.width = "100%";
+    } else if (guestNum === 0 && right_wrapper.style.display !== "none") {
+        right_wrapper.style.width = "100%";
+        left_wrapper.style.display = "none";
+    }
+}
 
-export { host, addGuest, setHost, swapHostGuest };
+export { env, checkGuestNum, addGuest, setHost, swapHostGuest };

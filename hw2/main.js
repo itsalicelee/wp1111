@@ -1,4 +1,4 @@
-import { host, addGuest, setHost, swapHostGuest } from "./utils.js";
+import { env, checkGuestNum, addGuest, setHost, swapHostGuest } from "./utils.js";
 
 /* event delegation of remove button */
 var bindRemoveGuest = function () {
@@ -6,6 +6,11 @@ var bindRemoveGuest = function () {
         if (e.target && e.target.classList.contains("remove_button")) {
             var remove_button = e.target;
             remove_button.parentNode.parentNode.remove();
+            // You don't have remove button
+            env.guestNum -= 1;
+
+            console.log("remove guest!");
+            checkGuestNum(env.guestNum);
         }
     });
 };
@@ -16,15 +21,21 @@ var bindHostFunc = function () {
     hostFuncButton.addEventListener("click", () => {
         var left_wrapper = document.querySelector(".left_wrapper");
         var right_wrapper = document.querySelector(".right_wrapper");
-        addGuest(host.name, host.src);
+        addGuest(env.host_name, env.host_src);
+
         left_wrapper.style.display = "none";
+        left_wrapper.style.width = "0%";
+        right_wrapper.style.display = "flex";
         right_wrapper.style.width = "100%";
+        console.log("bind host!");
+
         var container = document.querySelectorAll(".container");
         Array.from(container).forEach((ele) => {
             ele.style.borderRadius = "5%";
             ele.style.width = "30%";
             ele.style.height = "50%";
         });
+        checkGuestNum(env.guestNum);
     });
 };
 

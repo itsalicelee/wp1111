@@ -14,7 +14,7 @@ body {
 .left_wrapper {
     background: #202124;
     float: left;
-    width: 65%;
+    width: 65%; /* if only you: 100%*/
     height: 90%;
     display: flex; /* if no host: none */
     flex-direction: column;
@@ -52,7 +52,7 @@ body {
     float: right;
     width: 35%; /* if no host: 100%*/
     height: 90%;
-    display: flex;
+    display: flex; /* if only you: none*/
     flex-direction: row;
     align-content: center;
     justify-content: center;
