@@ -7,6 +7,7 @@ import {
     swapHostGuest,
     clearInput,
     toggleAddParticipant,
+    setTime,
 } from "./utils.js";
 
 /* event delegation of remove button */
@@ -82,6 +83,11 @@ var bindAddParticipant = function () {
     addButton.addEventListener("click", function (event) {
         event.preventDefault();
         var name = document.getElementById("input_name").value;
+        if (name === "") {
+            alert("Please input your name!");
+            clearInput();
+            return;
+        }
         try {
             var src = URL.createObjectURL(document.getElementById("input_img").files[0]);
         } catch {
@@ -89,12 +95,8 @@ var bindAddParticipant = function () {
             clearInput();
             return;
         }
-        if (name === "") {
-            alert("Please input your name!");
-            clearInput();
-            return;
-        }
         addGuest(name, src);
+        env.guestNum += 1;
         document.querySelector("#add_tooltip").style.visibility = "hidden";
         adjustContainer();
         clearInput();
@@ -106,3 +108,4 @@ bindRemoveGuest();
 bindHostFunc();
 bindGuestFunc();
 bindAddParticipant();
+setInterval(setTime, 1);

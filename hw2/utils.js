@@ -18,10 +18,11 @@ function addGuest(name, src) {
              <img class="inv" src="./images/mute.png" width="25" height="25" />
          </div>
          <img class="func__guest" src="./images/func_guest.png" height="30" width="90" />
-         <img class="img__people" src="${src}" width="50%" />
+         <img class="img__people" src="${src}" width="21%" />
          <span class="name">${name}</span>`;
     var right_wrapper = document.querySelector(".right_wrapper");
-    right_wrapper.insertBefore(container_to_insert, right_wrapper.children[0]);
+    right_wrapper.insertBefore(container_to_insert, right_wrapper.children[-1]);
+    adjustContainer();
 }
 
 /* set the host to left wrapper and set display to flex */
@@ -167,4 +168,19 @@ function toggleAddParticipant() {
     });
 }
 
-export { env, checkGuestNum, addGuest, setHost, swapHostGuest, adjustContainer, clearInput, toggleAddParticipant };
+function setTime() {
+    var now = new Date().toLocaleTimeString({ hour12: true, hour: "2-digit", minute: "2-digit" });
+    document.getElementById("time").innerHTML = now + " | Web Programming";
+}
+
+export {
+    env,
+    checkGuestNum,
+    addGuest,
+    setHost,
+    swapHostGuest,
+    adjustContainer,
+    clearInput,
+    toggleAddParticipant,
+    setTime,
+};

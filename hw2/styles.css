@@ -250,6 +250,7 @@ input[type="checkbox"]:checked + span {
 }
 
 .pin__you {
+    width: 30vw;
     font-size: 18px;
     color: aliceblue;
     position: absolute;
