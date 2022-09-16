@@ -1,4 +1,13 @@
-import { env, adjustContainer, checkGuestNum, addGuest, setHost, swapHostGuest } from "./utils.js";
+import {
+    env,
+    adjustContainer,
+    checkGuestNum,
+    addGuest,
+    setHost,
+    swapHostGuest,
+    clearInput,
+    toggleAddParticipant,
+} from "./utils.js";
 
 /* event delegation of remove button */
 var bindRemoveGuest = function () {
@@ -63,7 +72,37 @@ var bindGuestFunc = function () {
         }
     });
 };
+
+/* event delegation of remove button */
+var bindAddParticipant = function () {
+    // toggle to show and hide tooltip
+    toggleAddParticipant();
+    // hide tooltip after click uplaod button
+    var addButton = document.querySelector("#add");
+    addButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        var name = document.getElementById("input_name").value;
+        try {
+            var src = URL.createObjectURL(document.getElementById("input_img").files[0]);
+        } catch {
+            alert("Please upload your profile image!");
+            clearInput();
+            return;
+        }
+        if (name === "") {
+            alert("Please input your name!");
+            clearInput();
+            return;
+        }
+        addGuest(name, src);
+        document.querySelector("#add_tooltip").style.visibility = "hidden";
+        adjustContainer();
+        clearInput();
+    });
+};
+
 adjustContainer();
 bindRemoveGuest();
 bindHostFunc();
 bindGuestFunc();
+bindAddParticipant();

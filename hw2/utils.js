@@ -149,4 +149,22 @@ function adjustContainer() {
     }
 }
 
-export { env, checkGuestNum, addGuest, setHost, swapHostGuest, adjustContainer };
+function clearInput() {
+    document.querySelector("#input_img").value = "";
+    document.querySelector("#input_name").value = "";
+}
+
+/* hide or show tooltip of add participant */
+function toggleAddParticipant() {
+    document.querySelector("#add_tool").addEventListener("click", (e) => {
+        var tooltip = document.querySelector("#add_tooltip");
+        console.log(tooltip.style.visibility);
+        if (tooltip.style.visibility === "hidden" || tooltip.style.visibility == "") {
+            tooltip.style.visibility = "visible";
+        } else {
+            tooltip.style.visibility = "hidden";
+        }
+    });
+}
+
+export { env, checkGuestNum, addGuest, setHost, swapHostGuest, adjustContainer, clearInput, toggleAddParticipant };
