@@ -102,7 +102,7 @@ body {
 }
 .container {
     width: 40%; /* if no host: 30% */
-    height: 20%; /* if no host: 50% */
+    height: 12%; /* if no host: 50% */ /* more guests: 1/#ofguests */
     background-color: rgba(128, 128, 128, 0.309);
     margin: 5px;
     border-radius: 15%;
@@ -132,6 +132,9 @@ body {
     color: aliceblue;
 }
 
+.img__people {
+    width: 21%;
+}
 .mute {
     border-radius: 50%;
     position: absolute;

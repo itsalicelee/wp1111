@@ -1,4 +1,4 @@
-import { env, checkGuestNum, addGuest, setHost, swapHostGuest } from "./utils.js";
+import { env, adjustContainer, checkGuestNum, addGuest, setHost, swapHostGuest } from "./utils.js";
 
 /* event delegation of remove button */
 var bindRemoveGuest = function () {
@@ -9,7 +9,7 @@ var bindRemoveGuest = function () {
             // You don't have remove button
             env.guestNum -= 1;
 
-            console.log("remove guest!");
+            adjustContainer();
             checkGuestNum(env.guestNum);
         }
     });
@@ -27,7 +27,6 @@ var bindHostFunc = function () {
         left_wrapper.style.width = "0%";
         right_wrapper.style.display = "flex";
         right_wrapper.style.width = "100%";
-        console.log("bind host!");
 
         var container = document.querySelectorAll(".container");
         Array.from(container).forEach((ele) => {
@@ -35,6 +34,7 @@ var bindHostFunc = function () {
             ele.style.width = "30%";
             ele.style.height = "50%";
         });
+        adjustContainer();
         checkGuestNum(env.guestNum);
     });
 };
@@ -59,10 +59,11 @@ var bindGuestFunc = function () {
                 // remove current host from guest
                 guestFuncButton.parentNode.remove();
             }
+            adjustContainer();
         }
     });
 };
-
+adjustContainer();
 bindRemoveGuest();
 bindHostFunc();
 bindGuestFunc();

@@ -1,7 +1,7 @@
 var env = {
     host_name: "You",
     host_src: "./images/profile0.png",
-    guestNum: 5,
+    guestNum: 14,
 };
 /* append guest container dom in the right wrapper */
 function addGuest(name, src) {
@@ -84,4 +84,69 @@ function checkGuestNum(guestNum) {
     }
 }
 
-export { env, checkGuestNum, addGuest, setHost, swapHostGuest };
+/* normal mode adjust height */
+function adjustContainerHeightNormal(container) {
+    var rows = Math.ceil(container.length / 2);
+    var height = (1 / rows - 0.03) * 100;
+    console.log(height);
+    // only adjust container height if it is less than 30%
+    if (height <= 30) {
+        Array.from(container).forEach((ele) => {
+            ele.style.height = height + "%";
+        });
+    }
+}
+
+/* together mode adjust height */
+function adjustContainerHeightTogether(container) {
+    // together mode adjust height
+    var rows = Math.ceil((env.guestNum + 1) / 3);
+    var height = (1 / rows - 0.03) * 100;
+    // only adjust container height if it is less than 50%
+    if (height <= 50) {
+        Array.from(container).forEach((ele) => {
+            ele.style.height = height + "%";
+        });
+    }
+}
+/* together mode adjust width */
+function adjustContainerWidthTogether(container) {
+    // reset all container width to 30%
+    Array.from(container).forEach((c) => {
+        c.style.width = "30%";
+    });
+    // get last row container
+    var last_row_num = container.length % 3;
+    var last_row_container = Array.from(container).slice(-last_row_num);
+    if (last_row_num !== 0) {
+        if (last_row_num == 1) {
+            last_row_container.forEach((ele) => {
+                ele.style.width = "37%";
+            });
+        } else {
+            last_row_container.forEach((ele) => {
+                ele.style.width = "35%";
+            });
+        }
+    }
+}
+/* adjust container size in right wrapper */
+function adjustContainer() {
+    var container = document.querySelectorAll(".container");
+    var left_wrapper = document.querySelector(".left_wrapper");
+    var right_wrapper = document.querySelector(".right_wrapper");
+
+    // normal mode
+    if (
+        right_wrapper.style.display === "none" ||
+        (right_wrapper.style.display !== "none" && left_wrapper.style.display !== "none")
+    ) {
+        adjustContainerHeightNormal(container);
+    } else if (left_wrapper.style.display === "none") {
+        // together mode
+        adjustContainerHeightTogether(container);
+        adjustContainerWidthTogether(container);
+    }
+}
+
+export { env, checkGuestNum, addGuest, setHost, swapHostGuest, adjustContainer };
