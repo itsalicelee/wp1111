@@ -1,7 +1,7 @@
 var env = {
     host_name: "You",
     host_src: "./images/profile0.png",
-    guestNum: 14,
+    guestNum: 7,
 };
 /* append guest container dom in the right wrapper */
 function addGuest(name, src) {
@@ -22,7 +22,7 @@ function addGuest(name, src) {
          <span class="name">${name}</span>`;
     var right_wrapper = document.querySelector(".right_wrapper");
     right_wrapper.insertBefore(container_to_insert, right_wrapper.children[-1]);
-    adjustContainer();
+    // adjustContainer();
 }
 
 /* set the host to left wrapper and set display to flex */
@@ -89,7 +89,6 @@ function checkGuestNum(guestNum) {
 function adjustContainerHeightNormal(container) {
     var rows = Math.ceil(container.length / 2);
     var height = (1 / rows - 0.03) * 100;
-    console.log(height);
     // only adjust container height if it is less than 30%
     if (height <= 30) {
         Array.from(container).forEach((ele) => {
@@ -159,7 +158,6 @@ function clearInput() {
 function toggleAddParticipant() {
     document.querySelector("#add_tool").addEventListener("click", (e) => {
         var tooltip = document.querySelector("#add_tooltip");
-        console.log(tooltip.style.visibility);
         if (tooltip.style.visibility === "hidden" || tooltip.style.visibility == "") {
             tooltip.style.visibility = "visible";
         } else {

@@ -35,3 +35,5 @@ Basic JavaScript Practice - Fake Google Meet
 -   <a href="https://www.flaticon.com/free-icons/delete" title="delete icons">Delete icons created by Pixel perfect - Flaticon</a>
 -   <a href="https://www.flaticon.com/free-icons/forbidden" title="forbidden icons">Forbidden icons created by Creative Stall Premium - Flaticon</a>
 -   <a href="https://www.flaticon.com/free-icons/female" title="female icons">Female icons created by Prosymbols Premium - Flaticon</a>
+-   <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Vectors Market - Flaticon</a>
+-   <a href="https://www.flaticon.com/free-icons/profile" title="profile icons">Profile icons created by Prosymbols Premium - Flaticon</a>
