@@ -2,15 +2,26 @@
 
 Basic JavaScript Practice - Fake Google Meet
 
+## How to run✅
+
+-   At the root directory of this folder, use the command `python -m http.server` in your cmd/terminal
+-   Open your browser with the URL `http://localhost:8000/index.html`
+
 ## Features✨
 
+-   Hosting the website with a webserver in Python locally
+-   Click on the function button to anchor and unanchor
+-   Click on the first right corner button to add a guest with custom name and profile image
+-   Showing an alert if the user did not enter name or upload profile image
+-   Showing current time
+-   Center if you are the only participant
+-   Arrange the guests container size according to the number of guests
 -   Elements for names, profile picture, anchored icon, mute icons, and all the tool icons
 -   Hover over the tool icons to show the tool tips
 -   Hover over main menu to display three additional function icons
 -   Hover over three additional function icons to reduce the transparancy
 -   Toggle mute botton to change the icon style to unmute
 -   Using font `Roboto` from [Google fonts](https://fonts.google.com/specimen/Roboto)
--   RWD design
 
 ## Icon source🔗
 
