@@ -1,5 +1,4 @@
 import React from 'react';
-import xIcon from '../img/x.png';
 
 function Input(props) {
     const handleKeyDown = (event) => {
@@ -7,7 +6,9 @@ function Input(props) {
         if (event.key === 'Enter' && event.keyCode === 13) {
             const toAdd = event.target.value; // get the input text
             event.target.value = ''; // clear input field
-            console.log(toAdd);
+            const newTask = { id: props.todoId, name: toAdd, completed: false };
+            props.setTasks([...props.tasks, newTask]);
+            props.setTodoId((prev) => prev + 1);
         }
     };
 
