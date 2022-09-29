@@ -227,3 +227,8 @@ input[type='checkbox'] {
     max-height: 25px;
     right: 17.5px;
 }
+
+.todo-app__item-completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
