@@ -10,6 +10,7 @@ Basic JavaScript Practice - Fake Google Meet
 ## Features✨
 
 -   Hosting the website with a webserver in Python locally
+-   Random initial guest!
 -   Click on the function button to anchor and unanchor
 -   Click on the first right corner button to add a guest with custom name and profile image
 -   Showing an alert if the user did not enter name or upload profile image

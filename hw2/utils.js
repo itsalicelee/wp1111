@@ -1,7 +1,7 @@
 var env = {
-    host_name: "You",
-    host_src: "./images/profile0.png",
-    guestNum: 7,
+    host_name: 'You',
+    host_src: './images/profile0.png',
+    guestNum: 15,
 };
 /* append guest container dom in the right wrapper */
 function addGuest(name, src) {
