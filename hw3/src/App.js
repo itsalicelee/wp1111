@@ -21,7 +21,7 @@ function App() {
             <section className="todo-app__main">
                 <Input tasks={tasks} setTasks={setTasks} todoId={todoId} setTodoId={setTodoId} setActiveTask={setActiveTask}/>
                 <ul className="todo-app__list" id="todo-list" style={{ display: tasks.length > 0 ? '' : 'none' }}>
-                    <Todo tasks={tasks} setActiveTask={setActiveTask} />
+                    <Todo tasks={tasks} setTasks={setTasks} setActiveTask={setActiveTask} />
                 </ul>
             </section>
             <Footer todoLength={tasks.length} activeTaskNum={getActiveTask().length} />

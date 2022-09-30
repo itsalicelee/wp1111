@@ -3,7 +3,7 @@ import xIcon from '../img/x.png';
 
 function Todo(props) {
     let tasks = props.tasks;
-    
+
     function handleCheck(event) {
         let changedTask = tasks.find((task) => task.id.toString() === event.target.id);
         changedTask.completed = !changedTask.completed;
@@ -14,6 +14,10 @@ function Todo(props) {
         props.setActiveTask([tasks.filter((task) => task.completed === false)]);
     }
 
+    function handleClick(event) {
+        props.setTasks(props.tasks.filter((task) => task.id.toString() !== event.target.id));
+    }
+
     return tasks.map((task) => (
         <li className="todo-app__item" key={task.id}>
             <div className="todo-app__checkbox">
@@ -21,7 +25,7 @@ function Todo(props) {
                 <label htmlFor={task.id} />
             </div>
             <h1 className={'todo-app__item-detail'}>{task.name}</h1>
-            <img alt="x-icon" src={xIcon} className="todo-app__item-x" />
+            <img alt="x-icon" id={task.id} src={xIcon} className="todo-app__item-x" onClick={handleClick} />
         </li>
     ));
 }
