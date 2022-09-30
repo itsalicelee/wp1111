@@ -5,7 +5,7 @@ function Footer(props) {
 
     return (
         <footer id="todo-footer" className="todo-app__footer" style={{ display: displayState }}>
-            <div className="todo-app__total">2 left</div>
+            <div className="todo-app__total">{props.activeTaskNum} left</div>
             <ul className="todo-app__view-buttons">
                 <button> All </button>
                 <button> Active </button>

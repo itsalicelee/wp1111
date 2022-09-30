@@ -3,6 +3,7 @@ import xIcon from '../img/x.png';
 
 function Todo(props) {
     let tasks = props.tasks;
+    
     function handleCheck(event) {
         let changedTask = tasks.find((task) => task.id.toString() === event.target.id);
         changedTask.completed = !changedTask.completed;
@@ -10,6 +11,7 @@ function Todo(props) {
         const h1 = event.target.parentNode.parentNode.childNodes[1];
         if (changedTask.completed) h1.classList.add('todo-app__item-completed');
         else h1.classList.remove('todo-app__item-completed');
+        props.setActiveTask([tasks.filter((task) => task.completed === false)]);
     }
 
     return tasks.map((task) => (
