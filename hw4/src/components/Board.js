@@ -55,19 +55,43 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         // Basic TODO: Right Click to add a flag on board[x][y]
         // Remember to check if board[x][y] is able to add a flag (remainFlagNum, board[x][y].revealed)
         // Update board and remainFlagNum in the end
+        if (newBoard[x][y].revealed) {
+            return;
+        } else if (!newBoard[x][y].revealed && !newBoard[x][y].flagged && newFlagNum > 0) {
+            // add flag
+            newBoard[x][y].flagged = true;
+            newFlagNum--;
+        } else if (board[x][y].flagged) {
+            // remove flag
+            newBoard[x][y].flagged = false;
+            newFlagNum++;
+        }
+        setBoard(newBoard);
+        setRemainFlagNum(newFlagNum);
     };
 
     const revealCell = (x, y) => {
         if (board[x][y].revealed || gameOver || board[x][y].flagged) return;
         let newBoard = JSON.parse(JSON.stringify(board));
-
+        let newNonMinesCount = revealed(newBoard, x, y, nonMineCount).newNonMinesCount;
         // Basic TODO: Complete the conditions of revealCell (Refer to reveal.js)
         // Hint: If `Hit the mine`, check ...?
         //       Else if `Reveal the number cell`, check ...?
         // Reminder: Also remember to handle the condition that after you reveal this cell then you win the game.
+
+        if (board[x][y].value === "💣") {
+            setGameOver(true);
+        } else {
+            console.log(nonMineCount);
+            console.log(remainFlagNum);
+            if (nonMineCount === 1 && remainFlagNum === 0) {
+                setWin(true);
+            }
+        }
+        setBoard(newBoard);
+        setNonMineCount(newNonMinesCount);
     };
 
-    
     return (
         <div className="boardPage">
             <div className="boardWrapper">

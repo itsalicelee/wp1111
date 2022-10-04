@@ -6,10 +6,10 @@
   Copyright     [ 2022 10 ]
 ****************************************************************************/
 
-import './MineSweeper.css';
-import Board from '../components/Board';
-import React, { useState } from 'react';
-import HomePage from '../components/HomePage';
+import "./MineSweeper.css";
+import Board from "../components/Board";
+import React, { useState } from "react";
+import HomePage from "../components/HomePage";
 
 const MineSweeper = () => {
     const [startGame, setStartGame] = useState(false); // A boolean variable. If true, show `Board`, else show `HomePage`.
@@ -39,7 +39,7 @@ const MineSweeper = () => {
     return (
         <div className="mineSweeper">
             {/* Basic TODO: `HomePage` and `Board` will switch based on the mode of `startGame`. If `startGame` is true, show `Board`; else show `HomePage` */}
-            {startGame ? <Board boardSize={boardSize}  mineNum={mineNum} /> : <HomePage startGameOnClick={startGameOnClick} />}
+            {startGame ? <Board boardSize={boardSize} mineNum={mineNum} /> : <HomePage startGameOnClick={startGameOnClick} />}
             {/* Advanced TODO: pass all parameters into `Board` and `HomePage`*/}
         </div>
     );
