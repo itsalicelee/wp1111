@@ -21,16 +21,27 @@ const HomePage = ({
 }) => {
     const [showPanel, setShowPanel] = useState(false); // A boolean variable. If true, the controlPanel will show.
     const [error, setError] = useState(false); // A boolean variable. If true, means that the numbers of mines and the board size are invalid to build a game.
-    {
-        /* Advanced TODO: Implementation of Difficult Adjustment
+
+    /* Advanced TODO: Implementation of Difficult Adjustment
                      Some functions may be added here! */
+    const hasError = (mineNum, boardSize) => {
+        return mineNum > boardSize * boardSize;
+    };
+
+    function handlMineOnChange(event) {
+        mineNumOnChange(event.target.value);
+        hasError(mineNum, boardSize) ? setError(true) : setError(false);
+    }
+    function handleBoardSizeOnChange(event) {
+        boardSizeOnChange(event.target.value);
+        hasError(mineNum, boardSize) ? setError(true) : setError(false);
     }
 
     return (
         <div className="HomeWrapper">
             <p className="title">MineSweeper</p>
             {/* Basic TODO:  Implemen start button */}
-            <button className="btn" onClick={startGameOnClick}>
+            <button className="btn" onClick={startGameOnClick} disabled={error ? true : false}>
                 Start Game
             </button>
             {/* Advanced TODO: Implementation of Difficult Adjustment
@@ -41,15 +52,15 @@ const HomePage = ({
                 <button className="btn" onClick={() => setShowPanel(!showPanel)}>
                     Difficulty Adjustment
                 </button>
-                <div id="controlWrapper" className="controlWrapper" style={showPanel ? { display: "" } : { display: "none" }}>
-                    <div className="error" style={error ? { display: "" } : { display: "none" }}>
+                <div id="controlWrapper" className="controlWrapper" style={showPanel ? { visibility: "visible" } : { visibility: "hidden" }}>
+                    <div className="error" style={(showPanel && error) ? { visibility: "visible" } : { visibility: "hidden" }}>
                         Error: Mines number and board size are invalid!
                     </div>
                     <div className="controlPanel">
                         <div className="controlCol">
                             <p className="controlTitle">Mines Number</p>
                             {/*TODO: adjust min max size */}
-                            <input type="range" step="1" min="1" max="100" defaultValue="10" onChange={(e) => mineNumOnChange(e.target.value)} />
+                            <input type="range" step="1" min="1" max="100" defaultValue="10" onChange={handlMineOnChange} />
                             <p className="controlNum" style={error ? { color: "#880000" } : { color: "#0f0f4b" }}>
                                 {mineNum}
                             </p>
@@ -57,7 +68,7 @@ const HomePage = ({
                         <div className="controlCol">
                             <p className="controlTitle">Board Size(n*n)</p>
                             {/*TODO: adjust min max size */}
-                            <input type="range" step="1" min="1" max="15" defaultValue="8" onChange={(e) => boardSizeOnChange(e.target.value)} />
+                            <input type="range" step="1" min="1" max="15" defaultValue="8" onChange={handleBoardSizeOnChange} />
                             <p className="controlNum" style={error ? { color: "#880000" } : { color: "#0f0f4b" }}>
                                 {boardSize}
                             </p>
