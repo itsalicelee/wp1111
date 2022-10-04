@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 /****************************************************************************
   FileName      [ createBoard.js ]
   PackageName   [ src/util ]
@@ -77,6 +78,7 @@ export default (boardSize, mineNum) => {
     }
 
     //  Testing: printBoard()
+    printBoard();
 
     return { board, mineLocations };
 };
