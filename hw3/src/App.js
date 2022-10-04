@@ -46,6 +46,7 @@ function App() {
                 filter={filter}
                 setFilter={setFilter}
                 displayClearCompleted={getCompletedTask().length !== 0 ? 'visible' : 'hidden'}
+                setCompletedTask={setCompletedTask}
             />
         </div>
     );

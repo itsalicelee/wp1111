@@ -3,6 +3,9 @@ import React from 'react';
 function Footer(props) {
     let displayState = props.todoLength > 0 ? '' : 'none';
 
+    function handleClearCompleted(event) {
+        props.setTasks(props.tasks.filter((task) => task.completed === false));
+    }
     return (
         <footer id="todo-footer" className="todo-app__footer" style={{ display: displayState }}>
             <div className="todo-app__total">{props.activeTaskNum} left</div>
@@ -18,7 +21,11 @@ function Footer(props) {
                 </button>
             </ul>
             <div className="todo-app__clean">
-                <button id="button_clearCompleted" style={{ visibility: props.displayClearCompleted }}>
+                <button
+                    id="button_clearCompleted"
+                    style={{ visibility: props.displayClearCompleted }}
+                    onClick={handleClearCompleted}
+                >
                     Clear Completed
                 </button>
             </div>
