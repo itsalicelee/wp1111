@@ -5,14 +5,15 @@ import Todo from './components/Todo';
 import Footer from './components/Footer';
 import Input from './components/Input';
 
-
 function App() {
     const [tasks, setTasks] = useState([]);
     const [todoId, setTodoId] = useState(0);
     const [activeTask, setActiveTask] = useState([]);
+    const [completedTask, setCompletedTask] = useState([]);
     const [filter, setFilter] = useState('All');
 
     let getActiveTask = () => tasks.filter((task) => task.completed === false);
+    let getCompletedTask = () => tasks.filter((task) => task.completed === true);
 
     return (
         <div id="root" className="todo-app__root">
@@ -28,7 +29,13 @@ function App() {
                     setActiveTask={setActiveTask}
                 />
                 <ul className="todo-app__list" id="todo-list" style={{ display: tasks.length > 0 ? '' : 'none' }}>
-                    <Todo tasks={tasks} setTasks={setTasks} setActiveTask={setActiveTask} filter={filter}/>
+                    <Todo
+                        tasks={tasks}
+                        setTasks={setTasks}
+                        setActiveTask={setActiveTask}
+                        filter={filter}
+                        setCompletedTask={setCompletedTask}
+                    />
                 </ul>
             </section>
             <Footer
@@ -38,6 +45,7 @@ function App() {
                 setTasks={setTasks}
                 filter={filter}
                 setFilter={setFilter}
+                displayClearCompleted={getCompletedTask().length !== 0 ? 'visible' : 'hidden'}
             />
         </div>
     );

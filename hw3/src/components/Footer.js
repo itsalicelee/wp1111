@@ -18,7 +18,9 @@ function Footer(props) {
                 </button>
             </ul>
             <div className="todo-app__clean">
-                <button> Clear Completed </button>
+                <button id="button_clearCompleted" style={{ visibility: props.displayClearCompleted }}>
+                    Clear Completed
+                </button>
             </div>
         </footer>
     );

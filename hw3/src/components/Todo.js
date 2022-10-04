@@ -23,6 +23,7 @@ function Todo(props) {
         if (changedTask.completed) h1.classList.add('todo-app__item-completed');
         else h1.classList.remove('todo-app__item-completed');
         props.setActiveTask([tasks.filter((task) => task.completed === false)]);
+        props.setCompletedTask([tasks.filter((task) => task.completed === true)]);
     }
 
     const handleClick = (event) => {
