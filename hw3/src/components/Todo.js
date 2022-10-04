@@ -28,20 +28,18 @@ function Todo(props) {
     const handleClick = (event) => {
         props.setTasks(props.tasks.filter((task) => task.id.toString() !== event.target.id));
     };
-    // if (props.mode === 1) {
-    //     tasks.filter((task) => task.completed === false);
-    // } else if (props.mode === 2) {
-    //     tasks.filter((task) => task.completed === true);
-    // }
+
     const filteredTasks = getFilteredTasks(props);
 
     return filteredTasks.filter(FILTER_MAP[props.filter]).map((task) => (
         <li className="todo-app__item" key={task.id}>
             <div className="todo-app__checkbox">
-                <input type="checkbox" id={task.id} onChange={(e) => handleCheck(e)} />
+                <input type="checkbox" id={task.id} onChange={(e) => handleCheck(e)} checked={task.completed} />
                 <label htmlFor={task.id} />
             </div>
-            <h1 className={'todo-app__item-detail'}>{task.name}</h1>
+            <h1 className={task.completed ? 'todo-app__item-detail todo-app__item-completed' : 'todo-app__item-detail'}>
+                {task.name}
+            </h1>
             <img alt="x-icon" id={task.id} src={xIcon} className="todo-app__item-x" onClick={handleClick} />
         </li>
     ));

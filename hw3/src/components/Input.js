@@ -1,6 +1,4 @@
-import React, {useState} from 'react';
-
-
+import React from 'react';
 
 function Input(props) {
     const handleKeyDown = (event) => {

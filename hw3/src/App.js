@@ -10,11 +10,9 @@ function App() {
     const [tasks, setTasks] = useState([]);
     const [todoId, setTodoId] = useState(0);
     const [activeTask, setActiveTask] = useState([]);
-    const [completedTask, setCompletedTask] = useState([]);
     const [filter, setFilter] = useState('All');
 
     let getActiveTask = () => tasks.filter((task) => task.completed === false);
-    let getCompletedTask = () => tasks.filter((task) => task.completed === true);
 
     return (
         <div id="root" className="todo-app__root">
