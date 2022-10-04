@@ -1,6 +1,17 @@
 import React from 'react';
 import xIcon from '../img/x.png';
 
+const FILTER_MAP = {
+    All: () => true,
+    Active: (task) => !task.completed,
+    Completed: (task) => task.completed,
+};
+
+const getFilteredTasks = (props) => {
+    let tasks = props.tasks;
+    return tasks.filter(FILTER_MAP[props.filter]);
+};
+
 function Todo(props) {
     let tasks = props.tasks;
 
@@ -14,11 +25,17 @@ function Todo(props) {
         props.setActiveTask([tasks.filter((task) => task.completed === false)]);
     }
 
-    function handleClick(event) {
+    const handleClick = (event) => {
         props.setTasks(props.tasks.filter((task) => task.id.toString() !== event.target.id));
-    }
+    };
+    // if (props.mode === 1) {
+    //     tasks.filter((task) => task.completed === false);
+    // } else if (props.mode === 2) {
+    //     tasks.filter((task) => task.completed === true);
+    // }
+    const filteredTasks = getFilteredTasks(props);
 
-    return tasks.map((task) => (
+    return filteredTasks.filter(FILTER_MAP[props.filter]).map((task) => (
         <li className="todo-app__item" key={task.id}>
             <div className="todo-app__checkbox">
                 <input type="checkbox" id={task.id} onChange={(e) => handleCheck(e)} />

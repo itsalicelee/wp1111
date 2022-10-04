@@ -7,9 +7,15 @@ function Footer(props) {
         <footer id="todo-footer" className="todo-app__footer" style={{ display: displayState }}>
             <div className="todo-app__total">{props.activeTaskNum} left</div>
             <ul className="todo-app__view-buttons">
-                <button> All </button>
-                <button> Active </button>
-                <button> Completed </button>
+                <button id="button_all" onClick={() => props.setFilter('All')}>
+                    All
+                </button>
+                <button id="button_active" onClick={() => props.setFilter('Active')}>
+                    Active
+                </button>
+                <button id="button_completed" onClick={() => props.setFilter('Completed')}>
+                    Completed
+                </button>
             </ul>
             <div className="todo-app__clean">
                 <button> Clear Completed </button>
