@@ -73,23 +73,23 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
     const revealCell = (x, y) => {
         if (board[x][y].revealed || gameOver || board[x][y].flagged) return;
         let newBoard = JSON.parse(JSON.stringify(board));
-        let newNonMinesCount = revealed(newBoard, x, y, nonMineCount).newNonMinesCount;
+        let newNonMinesCount = revealed(newBoard, x, y, nonMineCount, boardSize).newNonMinesCount;
         // Basic TODO: Complete the conditions of revealCell (Refer to reveal.js)
         // Hint: If `Hit the mine`, check ...?
         //       Else if `Reveal the number cell`, check ...?
         // Reminder: Also remember to handle the condition that after you reveal this cell then you win the game.
+        console.log(nonMineCount);
+        console.log(remainFlagNum);
+        setBoard(newBoard);
+        setNonMineCount(newNonMinesCount);
 
         if (board[x][y].value === "💣") {
             setGameOver(true);
         } else {
-            console.log(nonMineCount);
-            console.log(remainFlagNum);
-            if (nonMineCount === 1 && remainFlagNum === 0) {
+            if (nonMineCount === 0 && remainFlagNum === 0) {
                 setWin(true);
             }
         }
-        setBoard(newBoard);
-        setNonMineCount(newNonMinesCount);
     };
 
     return (
