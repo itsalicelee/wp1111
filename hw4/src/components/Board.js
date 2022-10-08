@@ -26,7 +26,12 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         // Calling the function
         freshBoard();
     }, []);
-
+    useEffect(() => {
+        // When title or name changed will render
+        if (nonMineCount === 1 && remainFlagNum === 0) {
+            setWin(true);
+        }
+    }, [remainFlagNum, nonMineCount]);
     // Creating a board
     const freshBoard = () => {
         const newBoard = createBoard(boardSize, mineNum);
@@ -46,6 +51,9 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
 
     // On Right Click / Flag Cell
     const updateFlag = (e, x, y) => {
+        if (nonMineCount === 0 && remainFlagNum === 0) {
+            setWin(true);
+        }
         // To not have a dropdown on right click
         e.preventDefault();
         // Deep copy of a state
@@ -56,7 +64,7 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         // Remember to check if board[x][y] is able to add a flag (remainFlagNum, board[x][y].revealed)
         // Update board and remainFlagNum in the end
         if (!newBoard[x][y].revealed) {
-            if (!newBoard[x][y].revealed && !newBoard[x][y].flagged && remainFlagNum > 0) {
+            if (!newBoard[x][y].revealed && !newBoard[x][y].flagged && newFlagNum > 0) {
                 // add flag
                 newBoard[x][y].flagged = true;
                 newFlagNum--;
@@ -71,15 +79,17 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         setRemainFlagNum(newFlagNum);
 
         if (nonMineCount === 0 && remainFlagNum === 0) {
-            console.log("!!!!!!!!");
             setWin(true);
         }
     };
 
     const revealCell = (x, y) => {
+        if (nonMineCount === 0 && remainFlagNum === 0) {
+            setWin(true);
+        }
         if (board[x][y].revealed || gameOver || board[x][y].flagged) return;
         let newBoard = JSON.parse(JSON.stringify(board));
-        let updatedBoard = revealed(newBoard, x, y, setNonMineCount, nonMineCount, setBoard, boardSize, revealNum).board;
+        let updatedBoard = revealed(newBoard, x, y, setNonMineCount, nonMineCount, setBoard, boardSize).board;
 
         setBoard(updatedBoard);
         // Basic TODO: Complete the conditions of revealCell (Refer to reveal.js)
@@ -90,16 +100,12 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
             .map((row) => row.map((cell) => cell.revealed))
             .flat()
             .filter((item) => item === false);
-        console.log(newNonMine);
-
-        setNonMineCount(newNonMine.length - mineNum - remainFlagNum);
-        console.log(nonMineCount, remainFlagNum);
+        setNonMineCount(newNonMine.length - mineNum);
 
         if (board[x][y].value === "💣") {
             setGameOver(true);
         }
         if (nonMineCount === 0 && remainFlagNum === 0) {
-            console.log("!!!!!!!!");
             setWin(true);
         }
     };
