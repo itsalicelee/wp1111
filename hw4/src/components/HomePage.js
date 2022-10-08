@@ -56,7 +56,7 @@ const HomePage = ({
                         <div className="controlCol">
                             <p className="controlTitle">Mines Number</p>
                             {/*TODO: adjust min max size */}
-                            <input type="range" step="1" min="1" max="100" defaultValue="10" onChange={(e) => mineNumOnChange(e.target.value)} />
+                            <input type="range" step="1" min="2" max="100" defaultValue="10" onChange={(e) => mineNumOnChange(e.target.value)} />
                             <p className="controlNum" style={error ? { color: "#880000" } : { color: "#0f0f4b" }}>
                                 {mineNum}
                             </p>
@@ -64,7 +64,7 @@ const HomePage = ({
                         <div className="controlCol">
                             <p className="controlTitle">Board Size(n*n)</p>
                             {/*TODO: adjust min max size */}
-                            <input type="range" step="1" min="1" max="15" defaultValue="8" onChange={(e) => boardSizeOnChange(e.target.value)} />
+                            <input type="range" step="1" min="2" max="15" defaultValue="8" onChange={(e) => boardSizeOnChange(e.target.value)} />
                             <p className="controlNum" style={error ? { color: "#880000" } : { color: "#0f0f4b" }}>
                                 {boardSize}
                             </p>

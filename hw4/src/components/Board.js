@@ -85,7 +85,7 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
     const revealCell = (x, y) => {
         if (board[x][y].revealed || gameOver || board[x][y].flagged) return;
         let newBoard = JSON.parse(JSON.stringify(board));
-        let updatedBoard = revealed(newBoard, x, y, setNonMineCount, nonMineCount, setBoard, boardSize).board;
+        let updatedBoard = revealed(newBoard, x, y).board;
 
         setBoard(updatedBoard);
         // Basic TODO: Complete the conditions of revealCell (Refer to reveal.js)
@@ -111,7 +111,7 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         <div className="boardPage">
             <div className="boardWrapper">
                 {/* Advanced TODO: Implement Modal based on the state of `gameOver` */}
-                <Modal restartGame={restartGame} backToHome={backToHome} win={win} gameOver={gameOver}/>
+                <Modal restartGame={restartGame} backToHome={backToHome} win={win} gameOver={gameOver} />
 
                 {/* Basic TODO: Implement Board 
                 Useful Hint: The board is composed of BOARDSIZE*BOARDSIZE of Cell (2-dimention). So, nested 'map' is needed to implement the board.
