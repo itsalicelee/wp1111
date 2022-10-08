@@ -6,7 +6,8 @@
   Copyright     [ 2022 10 ]
 ****************************************************************************/
 
-export const revealed = (board, x, y, setNonMineCount, nonMineCount) => {
+export const revealed = (board, x, y, setNonMineCount, nonMineCount, setBoard, boardSize) => {
+    let orig_count = nonMineCount;
     // board[x][y].revealed = true;
 
     // Advanced TODO: reveal cells in a more intellectual way.
@@ -15,36 +16,31 @@ export const revealed = (board, x, y, setNonMineCount, nonMineCount) => {
     //              If the value of the cell is 0, we should try to find the value of adjacent cells until the value we found is not 0.
     //              The input variables 'newNonMinesCount' and 'board' may be changed in this function.
     //TODO: set newNonMinesCount to when reveal == 0
-    // console.log("start: ", newNonMinesCount, `(${x}, ${y})`);
     if (!board[x][y].revealed) {
-        if (board[x][y].value !== 0) {
+        if (board[x][y].value !== 0 && !board[x][y].flagged) {
             board[x][y].revealed = true;
-            setNonMineCount((prev) => prev - 1);
-            // newNonMinesCount--;
-            console.log("1", nonMineCount);
-        } else if (board[x][y].value === 0) {
-            board[x][y].revealed = true;
-            setNonMineCount((prev) => prev - 1);
-            console.log("2", nonMineCount);
+        } else {
+            if (!board[x][y].flagged) {
+                board[x][y].revealed = true;
+            }
 
             if (x !== board.length - 1) {
                 // reveal down cell
-                revealed(board, x + 1, y, setNonMineCount, nonMineCount);
+                revealed(board, x + 1, y, setNonMineCount, nonMineCount, setBoard);
             }
             if (y !== board.length - 1) {
                 // reveal right cell
-                revealed(board, x, y + 1, setNonMineCount, nonMineCount);
+                revealed(board, x, y + 1, setNonMineCount, nonMineCount, setBoard);
             }
             if (x !== 0) {
                 // reveal up cell
-                revealed(board, x - 1, y, setNonMineCount, nonMineCount);
+                revealed(board, x - 1, y, setNonMineCount, nonMineCount, setBoard);
             }
             if (y !== 0) {
                 // reveal left cell
-                revealed(board, x, y - 1, setNonMineCount, nonMineCount);
+                revealed(board, x, y - 1, setNonMineCount, nonMineCount, setBoard);
             }
         }
     }
-    console.log("end: ", nonMineCount);
     return { board, nonMineCount };
 };
