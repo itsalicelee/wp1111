@@ -30,6 +30,7 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         // When title or name changed will render
         if (nonMineCount === 1 && remainFlagNum === 0) {
             setWin(true);
+            setGameOver(true);
         }
     }, [remainFlagNum, nonMineCount]);
     // Creating a board
@@ -51,9 +52,6 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
 
     // On Right Click / Flag Cell
     const updateFlag = (e, x, y) => {
-        if (nonMineCount === 0 && remainFlagNum === 0) {
-            setWin(true);
-        }
         // To not have a dropdown on right click
         e.preventDefault();
         // Deep copy of a state
@@ -78,15 +76,13 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         setBoard(newBoard);
         setRemainFlagNum(newFlagNum);
 
-        if (nonMineCount === 0 && remainFlagNum === 0) {
+        if (nonMineCount === 1 && remainFlagNum === 0) {
             setWin(true);
+            setGameOver(true);
         }
     };
 
     const revealCell = (x, y) => {
-        if (nonMineCount === 0 && remainFlagNum === 0) {
-            setWin(true);
-        }
         if (board[x][y].revealed || gameOver || board[x][y].flagged) return;
         let newBoard = JSON.parse(JSON.stringify(board));
         let updatedBoard = revealed(newBoard, x, y, setNonMineCount, nonMineCount, setBoard, boardSize).board;
@@ -105,8 +101,9 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         if (board[x][y].value === "💣") {
             setGameOver(true);
         }
-        if (nonMineCount === 0 && remainFlagNum === 0) {
+        if (nonMineCount === 1 && remainFlagNum === 0) {
             setWin(true);
+            setGameOver(true);
         }
     };
 
@@ -114,6 +111,8 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         <div className="boardPage">
             <div className="boardWrapper">
                 {/* Advanced TODO: Implement Modal based on the state of `gameOver` */}
+                <Modal restartGame={restartGame} backToHome={backToHome} win={win} gameOver={gameOver}/>
+
                 {/* Basic TODO: Implement Board 
                 Useful Hint: The board is composed of BOARDSIZE*BOARDSIZE of Cell (2-dimention). So, nested 'map' is needed to implement the board.
                 Reminder: Remember to use the component <Cell> and <Dashboard>. See Cell.js and Dashboard.js for detailed information. */}
