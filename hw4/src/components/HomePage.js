@@ -8,7 +8,7 @@
 ****************************************************************************/
 
 import "./css/HomePage.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const HomePage = ({
     startGameOnClick,
@@ -24,18 +24,14 @@ const HomePage = ({
 
     /* Advanced TODO: Implementation of Difficult Adjustment
                      Some functions may be added here! */
-    const hasError = (mineNum, boardSize) => {
-        return mineNum > boardSize * boardSize;
-    };
-
-    function handlMineOnChange(event) {
-        mineNumOnChange(event.target.value);
-        hasError(mineNum, boardSize) ? setError(true) : setError(false);
-    }
-    function handleBoardSizeOnChange(event) {
-        boardSizeOnChange(event.target.value);
-        hasError(mineNum, boardSize) ? setError(true) : setError(false);
-    }
+    useEffect(() => {
+        // Calling the function
+        if (mineNum > boardSize * boardSize) {
+            setError(true);
+        } else {
+            setError(false);
+        }
+    }, [mineNum, boardSize]);
 
     return (
         <div className="HomeWrapper">
@@ -53,14 +49,14 @@ const HomePage = ({
                     Difficulty Adjustment
                 </button>
                 <div id="controlWrapper" className="controlWrapper" style={showPanel ? { visibility: "visible" } : { visibility: "hidden" }}>
-                    <div className="error" style={(showPanel && error) ? { visibility: "visible" } : { visibility: "hidden" }}>
+                    <div className="error" style={showPanel && error ? { visibility: "visible" } : { visibility: "hidden" }}>
                         Error: Mines number and board size are invalid!
                     </div>
                     <div className="controlPanel">
                         <div className="controlCol">
                             <p className="controlTitle">Mines Number</p>
                             {/*TODO: adjust min max size */}
-                            <input type="range" step="1" min="1" max="100" defaultValue="10" onChange={handlMineOnChange} />
+                            <input type="range" step="1" min="1" max="100" defaultValue="10" onChange={(e) => mineNumOnChange(e.target.value)} />
                             <p className="controlNum" style={error ? { color: "#880000" } : { color: "#0f0f4b" }}>
                                 {mineNum}
                             </p>
@@ -68,7 +64,7 @@ const HomePage = ({
                         <div className="controlCol">
                             <p className="controlTitle">Board Size(n*n)</p>
                             {/*TODO: adjust min max size */}
-                            <input type="range" step="1" min="1" max="15" defaultValue="8" onChange={handleBoardSizeOnChange} />
+                            <input type="range" step="1" min="1" max="15" defaultValue="8" onChange={(e) => boardSizeOnChange(e.target.value)} />
                             <p className="controlNum" style={error ? { color: "#880000" } : { color: "#0f0f4b" }}>
                                 {boardSize}
                             </p>
