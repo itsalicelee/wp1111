@@ -4,6 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
+        "install": "(cd frontend && yarn install) && (cd backend && yarn install)",
         "start": "cd frontend && yarn start",
         "server": "cd backend && yarn server"
     },
