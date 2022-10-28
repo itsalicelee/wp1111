@@ -55,6 +55,7 @@ function App() {
                     setHasStarted(true);
                     setStatus("");
                     startGame();
+                    restart();
                 }}
             >
                 restart
