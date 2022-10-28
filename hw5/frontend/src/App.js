@@ -49,7 +49,12 @@ function App() {
     const winningMode = (
         <>
             <p>you won! the number was {number}.</p>
-            <button // Handle restart for backend and frontend
+            <button
+                onClick={() => {
+                    setHasWon(false);
+                    setHasStarted(true);
+                    startGame();
+                }}
             >
                 restart
             </button>
