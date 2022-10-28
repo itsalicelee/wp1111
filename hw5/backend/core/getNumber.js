@@ -1,4 +1,5 @@
-let number = 0;
+var number = 0;
+
 export const getNumber = () => {
     return number;
 };

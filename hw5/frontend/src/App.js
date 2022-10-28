@@ -28,9 +28,9 @@ function App() {
         <>
             <p>Guess a number between 1 to 100</p>
             <input // Get the value from input
+              onChange = {(event)=> setNumber(event.target.value)}
             ></input>
             <button // Send number to backend
-                //TODO:
                 onClick={handleGuess}
                 disabled={!number}
             >
