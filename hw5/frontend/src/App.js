@@ -13,7 +13,14 @@ function App() {
     const [status, setStatus] = useState("");
     const startMenu = (
         <div>
-            <button onClick={() => setHasStarted(true)}>Start</button>
+            <button
+                onClick={() => {
+                    setHasStarted(true);
+                    startGame();
+                }}
+            >
+                Start
+            </button>
         </div>
     );
     const handleGuess = async () => {
@@ -28,7 +35,7 @@ function App() {
         <>
             <p>Guess a number between 1 to 100</p>
             <input // Get the value from input
-              onChange = {(event)=> setNumber(event.target.value)}
+                onChange={(event) => setNumber(event.target.value)}
             ></input>
             <button // Send number to backend
                 onClick={handleGuess}

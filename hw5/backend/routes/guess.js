@@ -15,11 +15,11 @@ router.post("/start", (_, res) => {
 // res.status(406).send({ msg: 'Not a legal number.' }) // 如果沒有問題，回傳 status
 router.get("/guess", (req, res) => {
     const ans = getNumber();
-    const guess = req.query.number;
+    const guess = parseInt(req.query.number);
     if (!guess || guess < 1 || guess > 100) {
         res.status(406).send({ msg: "Not a legal number." });
     } else if (guess === ans) {
-        res.status(200).send("Equal");
+        res.status(200).send({ msg: "Equal" });
     } else if (guess < ans) {
         res.status(200).send({ msg: "Bigger" });
     } else if (guess > ans) {
