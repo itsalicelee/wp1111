@@ -21,9 +21,9 @@ router.get("/guess", (req, res) => {
     } else if (guess === ans) {
         res.status(200).send({ msg: "Equal" });
     } else if (guess < ans) {
-        res.status(200).send({ msg: "Bigger" });
+        res.status(200).send({ msg: `You guess ${guess}, guess bigger!` });
     } else if (guess > ans) {
-        res.status(200).send({ msg: "Smaller" });
+        res.status(200).send({ msg: `You guess ${guess}, guess smaller!` });
     }
 });
 

@@ -48,11 +48,12 @@ function App() {
     );
     const winningMode = (
         <>
-            <p>you won! the number was {number}.</p>
+            <p>You won! the number was {number}.</p>
             <button
                 onClick={() => {
                     setHasWon(false);
                     setHasStarted(true);
+                    setStatus("");
                     startGame();
                 }}
             >
