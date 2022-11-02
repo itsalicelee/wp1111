@@ -70,7 +70,7 @@ router.get("/cards", async (req, res) => {
     } else {
         res.send({
             messages: false,
-            message: isQueryName? "Name ": "Subject " + `(${query}) not found!`,
+            message: (isQueryName? "Name ": "Subject ") + `(${query}) not found!`,
         });
     }
 });
