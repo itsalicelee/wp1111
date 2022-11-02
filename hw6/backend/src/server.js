@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv-defaults";
 import db from "./db";
+import routes from "./routes";
+
 
 const app = express();
 app.use(cors());
@@ -13,3 +15,5 @@ app.get("/", (req, res) => {
 });
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 db.connect();
+
+app.use("/", routes);
