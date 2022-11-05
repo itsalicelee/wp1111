@@ -4,7 +4,7 @@ import { Button, Input, message, Tag } from 'antd';
 import useChat from './useChat';
 
 function App() {
-    const { status, messages, sendMessage } = useChat();
+    const { status, messages, sendMessage, clearMessages } = useChat();
     const [username, setUsername] = useState('');
     const [body, setBody] = useState('');
     const bodyRef = useRef(null);
@@ -35,7 +35,7 @@ function App() {
         <div className='App'>
             <div className='App-title'>
                 <h1>Simple Chat</h1>
-                <Button type='primary' danger>
+                <Button type='primary' danger onClick={clearMessages}>
                     Clear
                 </Button>
             </div>

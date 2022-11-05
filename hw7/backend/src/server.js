@@ -11,16 +11,17 @@ mongo.connect();
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
+
+
 const db = mongoose.connection;
-
-
 db.once('open', () => { 
 	console.log("MongoDB connected!"); 
 	wss.on('connection', (ws) => {
 		// ws is Client-side web socket object
-		ws.onmessage = wsConnect.onMessage(ws);
+		
 		// wsConnect.initData(ws);
-		// ws.onmessage = wsConnect.onMessage(wss,ws);
+		// ws.onmessage = wsConnect.onMessage(ws);
+		ws.onmessage = wsConnect.onMessage(wss, ws);
 
 	});
 });

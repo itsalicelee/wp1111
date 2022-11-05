@@ -8,6 +8,17 @@ const sendStatus = (payload, ws) => {
 };
 
 export default {
+    // object key: initData, onMessage
+    initData: (ws) => {
+        Message.find()
+            .sort({ created_at: -1 })
+            .limit(100)
+            .exec((err, res) => {
+                if (err) throw err;
+                // initialize app with existing messages
+                sendData(['init', res], ws);
+            });
+    },
     onMessage: (ws) => async (byteString) => {
         const { data } = byteString;
         const [task, payload] = JSON.parse(data);
@@ -25,6 +36,13 @@ export default {
                 // Respond to client
                 sendData(['output', [payload]], ws);
                 sendStatus({ type: 'success', msg: 'Message sent.' }, ws);
+                break;
+            }
+            case 'clear': {
+                Message.deleteMany({}, () => {
+                    sendData(['cleared'], ws);
+                    sendStatus({ type: 'info', msg: 'Message cache cleared.' }, ws);
+                });
                 break;
             }
         }
