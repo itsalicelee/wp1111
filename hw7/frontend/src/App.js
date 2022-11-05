@@ -5,7 +5,7 @@ import useChat from './useChat';
 
 function App() {
     const { status, messages, sendMessage } = useChat();
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState(''); 
     const [body, setBody] = useState('');
 
     const displayStatus = (s) => {
