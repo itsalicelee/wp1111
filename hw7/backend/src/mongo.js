@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv-defaults';
-
+// connect db 
 export default {
     connect: () => {
         dotenv.config();

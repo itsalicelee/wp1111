@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import { Button, Input, message, Tag } from 'antd';
 import useChat from './useChat';
 
 function App() {
     const { status, messages, sendMessage } = useChat();
-    const [username, setUsername] = useState(''); 
+    const [username, setUsername] = useState('');
     const [body, setBody] = useState('');
+    const bodyRef = useRef(null);
 
     const displayStatus = (s) => {
         if (s.msg) {
@@ -55,11 +56,24 @@ function App() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 style={{ marginBottom: 10 }}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        bodyRef.current.focus();
+                    }
+                }}
             ></Input>
             <Input.Search
+                ref={bodyRef} // change focus!
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 onSearch={(msg) => {
+                    if (!msg || !username) {
+                        displayStatus({
+                            type: 'error',
+                            msg: 'Please enter a username and a message body.',
+                        });
+                        return;
+                    }
                     sendMessage({ name: username, body: msg });
                     setBody('');
                 }}
