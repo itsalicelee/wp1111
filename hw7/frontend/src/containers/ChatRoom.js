@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import styled from 'styled-components';
-import { Button, Input, message, Tag } from 'antd';
+import { Button, Input, message, Tag, Tabs } from 'antd';
 import { useChat } from './hooks/useChat';
 import Title from '../components/Title';
 import Message from '../components/Message';
+import ChatModal from '../components/ChatModal';
 
-const ChatBoxesWrapper = styled.div`
+const ChatBoxesWrapper = styled(Tabs)`
     width: 100%;
     height: 300px;
     background: #eeeeee52;
@@ -16,16 +17,26 @@ const ChatBoxesWrapper = styled.div`
     overflow: auto;
 `;
 
+const ChatBoxWrapper = styled.div`
+    height: calc(240px-36px);
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+`;
+
 const FootRef = styled.div`
     height: 20px;
 `;
 
 const ChatRoom = () => {
     const { status, me, messages, sendMessage, clearMessages } = useChat();
+    const [chatBoxes, setChatBoxes] = useState([]); // {label, children , key}
+    const [activeKey, setActiveKey] = useState('');
     const [username, setUsername] = useState('');
-    const [msg, setMsg] = useState('');
+    const [body, setBody] = useState('');
     const bodyRef = useRef(null);
     const [msgSent, setMsgSent] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
 
     const msgRef = useRef(null);
     const msgFooter = useRef(null);
@@ -69,25 +80,39 @@ const ChatRoom = () => {
     return (
         <>
             <Title name={me} />
-            <ChatBoxesWrapper>
-                {displayMessages()}
-                <FootRef ref={msgFooter} />
-            </ChatBoxesWrapper>
-            <Input
-                placeholder='Username'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                style={{ marginBottom: 10 }}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                        msgRef.current.focus();
+            <ChatBoxesWrapper
+                tabBarStyle={{ height: '36px' }}
+                type='editable-card'
+                activeKey={activeKey}
+                onChange={(key) => {
+                    setActiveKey(key);
+                    extractChat(key);
+                }}
+                onEdit={(targetKey, action) => {
+                    if (action === 'add') setModalOpen(true);
+                    else if (action == 'remove') {
+                        setActiveKey(removeChatBox(targetKey, activeKey));
                     }
                 }}
-            ></Input>
+                items={chatBoxes}
+            />
+            <ChatModal
+                open={modalOpen}
+                onCreate={({ name }) => {
+                    setActiveKey(createChatBox(name, activeKey));
+                    extractChat(name);
+                    setModalOpen(false);
+                }}
+                onCancel={() => {
+                    setModalOpen(false);
+                }}
+            />
             <Input.Search
                 ref={msgRef} // change focus!
-                value={msg}
-                onChange={(e) => setMsg(e.target.value)}
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+                enterButton='Send'
+                placeholder='Type a message here...'
                 onSearch={(msg) => {
                     if (!msg || !username) {
                         displayStatus({
@@ -95,13 +120,18 @@ const ChatRoom = () => {
                             msg: 'Please enter a username and a message body.',
                         });
                         return;
+                    } else if (activeKey === '') {
+                        displayStatus({
+                            type: 'error',
+                            msg: 'Please add a chatbox first.',
+                        });
+                        setBody('');
+                        return;
                     }
-                    sendMessage({ name: username, body: msg });
-                    setMsg('');
+                    sendMessage({ name: me, body: msg });
+                    setBody('');
                     setMsgSent(true);
                 }}
-                enterButton='Send'
-                placeholder='Type a message here...'
             ></Input.Search>
         </>
     );

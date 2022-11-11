@@ -13,10 +13,10 @@ const ChatContext = createContext({
     clearMessages: () => {},
     displayStatus: () => {},
 });
-
 const client = new WebSocket('ws://localhost:4000');
 
-const ChatProvider = (props) => {    
+const ChatProvider = (props) => {
+    
     const [status, setStatus] = useState({});
     const [messages, setMessages] = useState([]);
     const [me, setMe] = useState(savedMe || '');
