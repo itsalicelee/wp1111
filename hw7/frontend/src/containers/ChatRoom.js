@@ -1,13 +1,43 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
+import styled from 'styled-components';
 import { Button, Input, message, Tag } from 'antd';
-import useChat from './useChat';
+import { useChat } from './hooks/useChat';
+import Title from '../components/Title';
+import Message from '../components/Message';
 
-function App() {
-    const { status, messages, sendMessage, clearMessages } = useChat();
+const ChatBoxesWrapper = styled.div`
+    width: 100%;
+    height: 300px;
+    background: #eeeeee52;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    overflow: auto;
+`;
+
+const FootRef = styled.div`
+    height: 20px;
+`;
+
+const ChatRoom = () => {
+    const { status, me, messages, sendMessage, clearMessages } = useChat();
     const [username, setUsername] = useState('');
-    const [body, setBody] = useState('');
+    const [msg, setMsg] = useState('');
     const bodyRef = useRef(null);
+    const [msgSent, setMsgSent] = useState(false);
+
+    const msgRef = useRef(null);
+    const msgFooter = useRef(null);
+
+    const displayMessages = () =>
+        messages.length === 0 ? (
+            <p style={{ color: '#ccc' }}>No messages...</p>
+        ) : (
+            messages.map(({ name, body }, i) => (
+                <Message name={name} isMe={name === me} message={body} key={i} />
+            ))
+        );
 
     const displayStatus = (s) => {
         if (s.msg) {
@@ -25,32 +55,24 @@ function App() {
         }
     };
 
+    const scrollToBottom = () => {
+        msgFooter.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
     useEffect(() => {
-        displayStatus(status);
-    }, [status]);
+        scrollToBottom();
+        setMsgSent(false);
+    }, [msgSent]);
     useEffect(() => {
         console.log(messages);
     }, [messages]);
     return (
-        <div className='App'>
-            <div className='App-title'>
-                <h1>Simple Chat</h1>
-                <Button type='primary' danger onClick={clearMessages}>
-                    Clear
-                </Button>
-            </div>
-            <div className='App-messages'>
-                {messages.length === 0 ? (
-                    <p style={{ color: '#ccc' }}>No messages...</p>
-                ) : (
-                    messages.map(({ name, body }, i) => (
-                        <p className='App-message' key={i}>
-                            <Tag color='blue'>{name}</Tag>
-                            {body}
-                        </p>
-                    ))
-                )}
-            </div>
+        <>
+            <Title name={me} />
+            <ChatBoxesWrapper>
+                {displayMessages()}
+                <FootRef ref={msgFooter} />
+            </ChatBoxesWrapper>
             <Input
                 placeholder='Username'
                 value={username}
@@ -58,14 +80,14 @@ function App() {
                 style={{ marginBottom: 10 }}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                        bodyRef.current.focus();
+                        msgRef.current.focus();
                     }
                 }}
             ></Input>
             <Input.Search
-                ref={bodyRef} // change focus!
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
+                ref={msgRef} // change focus!
+                value={msg}
+                onChange={(e) => setMsg(e.target.value)}
                 onSearch={(msg) => {
                     if (!msg || !username) {
                         displayStatus({
@@ -75,13 +97,14 @@ function App() {
                         return;
                     }
                     sendMessage({ name: username, body: msg });
-                    setBody('');
+                    setMsg('');
+                    setMsgSent(true);
                 }}
                 enterButton='Send'
                 placeholder='Type a message here...'
             ></Input.Search>
-        </div>
+        </>
     );
-}
+};
 
-export default App;
+export default ChatRoom;
