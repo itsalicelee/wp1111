@@ -24,4 +24,7 @@ const ChatBoxSchema = new Schema({
 
 const ChatBoxModel = mongoose.model('ChatBox', ChatBoxSchema);
 
+
+
+
 export default { UserModel, MessageModel, ChatBoxModel };

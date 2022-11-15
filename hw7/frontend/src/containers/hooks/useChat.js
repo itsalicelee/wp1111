@@ -9,22 +9,26 @@ const ChatContext = createContext({
     me: '',
     signedIn: false,
     messages: [],
+    startChat: () => {},
     sendMessage: () => {},
     clearMessages: () => {},
     displayStatus: () => {},
 });
 const client = new WebSocket('ws://localhost:4000');
+client.onopen = () => console.log('Backend socket server connected!');
 
 const ChatProvider = (props) => {
-    
     const [status, setStatus] = useState({});
     const [messages, setMessages] = useState([]);
     const [me, setMe] = useState(savedMe || '');
     const [signedIn, setSignedIn] = useState(false);
     client.onmessage = (byteString) => {
+        console.log('here!');
         const { data } = byteString;
-        const [task, payload] = JSON.parse(data);
-        switch (task) {
+        const [type, payload] = JSON.parse(data);
+        console.log(data);
+        console.log(type, payload);
+        switch (type) {
             case 'init': {
                 setMessages(payload);
                 break;
@@ -48,16 +52,30 @@ const ChatProvider = (props) => {
                 break;
         }
     };
-
-    const clearMessages = () => {
-        sendData(['clear']);
-    };
     const sendData = async (data) => {
+        console.log(data);
         await client.send(JSON.stringify(data));
     };
 
-    const sendMessage = (payload) => {
-        sendData(['input', payload]);
+    const startChat = (name, to) => {
+        if (!name || !to) throw new Error('Name or to required!');
+        sendData({ type: 'CHAT', payload: { name, to } });
+    };
+
+    // const clearMessages = () => {
+    //     sendData(['clear']);
+    // };
+    // const sendData = async (data) => {
+    //     await client.send(JSON.stringify(data));
+    // };
+
+    const sendMessage = ({ name, to, body }) => {
+        console.log(name, to, body);
+        if (!name || !to || !body) throw new Error('name or to or body required');
+        sendData({
+            type: 'input',
+            payload: { name, to, body },
+        });
         /* Fake messages for testing frontend */
         // setMessages([...messages, payload]);
         // setStatus({
@@ -99,7 +117,6 @@ const ChatProvider = (props) => {
                 signedIn,
                 setSignedIn,
                 sendMessage,
-                clearMessages,
                 displayStatus,
             }}
             {...props}

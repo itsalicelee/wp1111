@@ -2,8 +2,8 @@ import AppTitle from '../components/Title';
 import LogIn from '../components/Login';
 import { useChat } from './hooks/useChat';
 
-const SignIn = ({ me }) => {
-    const { setMe, setSignedIn, displayStatus } = useChat();
+const SignIn = () => {
+    const { me, setMe, setSignedIn, displayStatus } = useChat();
 
     const handleLogin = (name) => {
         if (!name)

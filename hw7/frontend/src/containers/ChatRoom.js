@@ -41,14 +41,14 @@ const ChatRoom = () => {
     const msgRef = useRef(null);
     const msgFooter = useRef(null);
 
-    const displayMessages = () =>
-        messages.length === 0 ? (
-            <p style={{ color: '#ccc' }}>No messages...</p>
-        ) : (
-            messages.map(({ name, body }, i) => (
-                <Message name={name} isMe={name === me} message={body} key={i} />
-            ))
-        );
+    // const displayMessages = () =>
+    //     messages.length === 0 ? (
+    //         <p style={{ color: '#ccc' }}>No messages...</p>
+    //     ) : (
+    //         messages.map(({ name, body }, i) => (
+    //             <Message name={name} isMe={name === me} message={body} key={i} />
+    //         ))
+    //     );
 
     const displayStatus = (s) => {
         if (s.msg) {
@@ -77,6 +77,43 @@ const ChatRoom = () => {
     useEffect(() => {
         console.log(messages);
     }, [messages]);
+
+    const renderChat = (chat) =>
+        chat.length === 0 ? (
+            <p style={{ color: '#ccc' }}>No messages...</p>
+        ) : (
+            chat.map(({ name, body }, i) => (
+                <Message name={name} isMe={name === me} message={body} key={i} />
+            ))
+        ); // 產生 chat 的 DOM nodes
+    const createChatBox = (friend) => {
+        if (chatBoxes.some(({ key }) => key === friend)) {
+            throw new Error(friend + "'s chat box has already opened.");
+        }
+        const chat = extractChat(friend);
+        setChatBoxes([...chatBoxes, { label: friend, children: chat, key: friend }]);
+        setUsername(friend);
+        setMsgSent(true);
+        return friend;
+    };
+
+    const removeChatBox = (targetKey, activeKey) => {
+        const index = chatBoxes.findIndex(({ key }) => key === activeKey);
+        const newChatBoxes = chatBoxes.filter(({ key }) => key !== targetKey);
+        setChatBoxes(newChatBoxes);
+        return activeKey
+            ? activeKey === targetKey
+                ? index === 0
+                    ? ''
+                    : chatBoxes[index - 1].key
+                : activeKey
+            : '';
+    };
+    const extractChat = (friend) => {
+        return renderChat(
+            messages.filter(({ name, body }) => name === friend || name === me)
+        );
+    };
     return (
         <>
             <Title name={me} />
@@ -87,10 +124,11 @@ const ChatRoom = () => {
                 onChange={(key) => {
                     setActiveKey(key);
                     extractChat(key);
+                    // startChat(me, key);
                 }}
                 onEdit={(targetKey, action) => {
                     if (action === 'add') setModalOpen(true);
-                    else if (action == 'remove') {
+                    else if (action === 'remove') {
                         setActiveKey(removeChatBox(targetKey, activeKey));
                     }
                 }}
@@ -128,9 +166,11 @@ const ChatRoom = () => {
                         setBody('');
                         return;
                     }
-                    sendMessage({ name: me, body: msg });
+                    sendMessage({ name: me, to: username, body: msg });
                     setBody('');
                     setMsgSent(true);
+                    
+                    
                 }}
             ></Input.Search>
         </>
