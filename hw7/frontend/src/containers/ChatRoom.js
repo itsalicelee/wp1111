@@ -29,7 +29,7 @@ const FootRef = styled.div`
 `;
 
 const ChatRoom = () => {
-    const { status, me, messages, sendMessage, clearMessages } = useChat();
+    const { status, me, messages, sendMessage, clearMessages, startChat } = useChat();
     const [chatBoxes, setChatBoxes] = useState([]); // {label, children , key}
     const [activeKey, setActiveKey] = useState('');
     const [username, setUsername] = useState('');
@@ -74,9 +74,6 @@ const ChatRoom = () => {
         scrollToBottom();
         setMsgSent(false);
     }, [msgSent]);
-    useEffect(() => {
-        console.log(messages);
-    }, [messages]);
 
     const renderChat = (chat) =>
         chat.length === 0 ? (
@@ -101,13 +98,7 @@ const ChatRoom = () => {
         const index = chatBoxes.findIndex(({ key }) => key === activeKey);
         const newChatBoxes = chatBoxes.filter(({ key }) => key !== targetKey);
         setChatBoxes(newChatBoxes);
-        return activeKey
-            ? activeKey === targetKey
-                ? index === 0
-                    ? ''
-                    : chatBoxes[index - 1].key
-                : activeKey
-            : '';
+        return activeKey? activeKey === targetKey? index === 0? '': chatBoxes[index - 1].key : activeKey: '';
     };
     const extractChat = (friend) => {
         return renderChat(
@@ -124,7 +115,6 @@ const ChatRoom = () => {
                 onChange={(key) => {
                     setActiveKey(key);
                     extractChat(key);
-                    // startChat(me, key);
                 }}
                 onEdit={(targetKey, action) => {
                     if (action === 'add') setModalOpen(true);
@@ -135,10 +125,11 @@ const ChatRoom = () => {
                 items={chatBoxes}
             />
             <ChatModal
+                setActiveKey={setActiveKey}
                 open={modalOpen}
                 onCreate={({ name }) => {
-                    setActiveKey(createChatBox(name, activeKey));
-                    extractChat(name);
+                    setActiveKey(createChatBox(name));
+                    startChat(me, activeKey);
                     setModalOpen(false);
                 }}
                 onCancel={() => {
@@ -169,8 +160,6 @@ const ChatRoom = () => {
                     sendMessage({ name: me, to: username, body: msg });
                     setBody('');
                     setMsgSent(true);
-                    
-                    
                 }}
             ></Input.Search>
         </>

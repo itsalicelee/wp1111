@@ -1,6 +1,6 @@
 import { Modal, Form, Input } from 'antd';
 
-const ChatModal = ({ open, onCreate, onCancel }) => {
+const ChatModal = ({ open, onCreate, onCancel, setActiveKey }) => {
     const [form] = Form.useForm();
     return (
         <Modal
@@ -24,6 +24,7 @@ const ChatModal = ({ open, onCreate, onCancel }) => {
                 <Form.Item
                     name='name'
                     lable='Name'
+                    onChange={(e) => setActiveKey(e.target.value)}
                     rules={[
                         {
                             required: true,

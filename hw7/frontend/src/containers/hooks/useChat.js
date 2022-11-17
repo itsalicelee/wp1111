@@ -23,18 +23,23 @@ const ChatProvider = (props) => {
     const [me, setMe] = useState(savedMe || '');
     const [signedIn, setSignedIn] = useState(false);
     client.onmessage = (byteString) => {
-        console.log('here!');
         const { data } = byteString;
         const [type, payload] = JSON.parse(data);
-        console.log(data);
-        console.log(type, payload);
+        console.log("=====Use Chat=====");
+        console.log("type:", type );
+        console.log('payload:', payload);
+        console.log("messages:", messages);
         switch (type) {
+            case 'login': {
+                break;
+            }
             case 'init': {
                 setMessages(payload);
                 break;
             }
             case 'output': {
                 // received from server
+                console.log('[output] in useChat');
                 setMessages(() => [...messages, ...payload]);
                 break;
             }
@@ -58,8 +63,9 @@ const ChatProvider = (props) => {
     };
 
     const startChat = (name, to) => {
+        console.log(name, to);
         if (!name || !to) throw new Error('Name or to required!');
-        sendData({ type: 'CHAT', payload: { name, to } });
+        sendData({ type: 'chat', payload: { name, to } });
     };
 
     // const clearMessages = () => {
@@ -112,12 +118,15 @@ const ChatProvider = (props) => {
             value={{
                 status,
                 messages,
+                setMessages,
                 me,
                 setMe,
                 signedIn,
                 setSignedIn,
                 sendMessage,
                 displayStatus,
+                sendData,
+                startChat,
             }}
             {...props}
         />

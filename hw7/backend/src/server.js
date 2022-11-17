@@ -17,8 +17,8 @@ const db = mongoose.connection;
 db.once('open', () => {
     console.log('MongoDB connected!');
     wss.on('connection', (ws) => {
-        ws.id = uuidv4();
-        ws.box = ''; // keep track of client's CURRENT chat box
+        // ws.id = uuidv4();
+        // ws.box = ''; // keep track of client's CURRENT chat box
         // wsConnect.initData(ws);
         // ws is Client-side web socket object
         ws.onmessage = wsConnect.onMessage(wss, ws);

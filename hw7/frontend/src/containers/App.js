@@ -15,12 +15,16 @@ const Wrapper = styled.div`
 `;
 
 const App = () => {
-    const { status, me, messsage, signedIn, sendMessage, clearMessages, displayStatus } =
+    const { status, me, messages, signedIn, sendMessage, clearMessages, displayStatus } =
         useChat();
 
     useEffect(() => {
         displayStatus(status);
     }, [status]);
+
+    useEffect(() => {
+        console.log(messages);
+    }, [messages]);
 
     return <Wrapper>{signedIn ? <ChatRoom /> : <SignIn me={me} />}</Wrapper>;
 };

@@ -3,7 +3,7 @@ import LogIn from '../components/Login';
 import { useChat } from './hooks/useChat';
 
 const SignIn = () => {
-    const { me, setMe, setSignedIn, displayStatus } = useChat();
+    const { me, setMe, setSignedIn, displayStatus, sendData } = useChat();
 
     const handleLogin = (name) => {
         if (!name)
@@ -11,7 +11,13 @@ const SignIn = () => {
                 type: 'error',
                 msg: 'Missing username',
             });
-        else setSignedIn(true);
+        else {
+            setSignedIn(true);
+            sendData({
+                type: 'login',
+                payload: { name },
+            });
+        }
     };
 
     return (

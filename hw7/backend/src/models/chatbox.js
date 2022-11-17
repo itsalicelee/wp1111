@@ -1,13 +1,15 @@
 import mongoose from 'mongoose';
 
-const { Schema } = mongoose;
+const Schema = mongoose.Schema;
+
+/*======User Schema======*/
 const UserSchema = new Schema({
     name: { type: String, required: [true, 'Name field is required.'] },
     chatBoxes: [{ type: mongoose.Types.ObjectId, ref: 'ChatBox' }],
 });
 
 const UserModel = mongoose.model('User', UserSchema);
-
+/*======Message Schema======*/
 const MessageSchema = new Schema({
     chatBox: { type: mongoose.Types.ObjectId, ref: 'ChatBox' },
     sender: { type: mongoose.Types.ObjectId, ref: 'User' },
@@ -15,7 +17,7 @@ const MessageSchema = new Schema({
 });
 
 const MessageModel = mongoose.model('Message', MessageSchema);
-
+/*======Chatbox Schema======*/
 const ChatBoxSchema = new Schema({
     name: { type: String, required: [true, 'Name field is required.'] },
     users: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
@@ -24,7 +26,4 @@ const ChatBoxSchema = new Schema({
 
 const ChatBoxModel = mongoose.model('ChatBox', ChatBoxSchema);
 
-
-
-
-export default { UserModel, MessageModel, ChatBoxModel };
+export { UserModel, MessageModel, ChatBoxModel };
