@@ -91,7 +91,7 @@ export default {
                 // Respond to client
                 broadcastMessage(
                     wss,
-                    ['output', payload],
+                    ['backToSender', payload],
                     {
                         type: 'success',
                         msg: 'Message sent.',

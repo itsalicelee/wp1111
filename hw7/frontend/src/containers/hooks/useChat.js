@@ -34,13 +34,15 @@ const ChatProvider = (props) => {
                 break;
             }
             case 'init': {
-                setMessages(payload);
+                console.log('[init] in useChat')
+                setMessages([]);
                 break;
             }
-            case 'output': {
+            case 'backToSender': {
                 // received from server
                 console.log('[output] in useChat');
-                setMessages(() => [...messages, ...payload]);
+                setMessages([...messages, payload]);
+                console.log(messages);
                 break;
             }
             case 'status': {

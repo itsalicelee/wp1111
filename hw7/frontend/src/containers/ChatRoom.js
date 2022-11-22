@@ -65,6 +65,11 @@ const ChatRoom = () => {
             }
         }
     };
+    const extractChat = (friend) => {
+        return renderChat(
+            messages.filter(({ name, body }) => name === friend || name === me)
+        );
+    };
 
     const scrollToBottom = () => {
         msgFooter.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -75,14 +80,22 @@ const ChatRoom = () => {
         setMsgSent(false);
     }, [msgSent]);
 
-    const renderChat = (chat) =>
-        chat.length === 0 ? (
-            <p style={{ color: '#ccc' }}>No messages...</p>
+    useEffect(() => {
+        const chat = extractChat(activeKey);
+        setChatBoxes([{ label: activeKey, children: chat, key: activeKey }]);
+    }, [messages]);
+
+    const renderChat = (chat) => {
+        console.log(chat.length);
+        return chat.length === 0 ? (
+            <p style={{ color: '#ccc' }}>No messages...QQ </p>
         ) : (
             chat.map(({ name, body }, i) => (
                 <Message name={name} isMe={name === me} message={body} key={i} />
             ))
         ); // 產生 chat 的 DOM nodes
+    };
+
     const createChatBox = (friend) => {
         if (chatBoxes.some(({ key }) => key === friend)) {
             throw new Error(friend + "'s chat box has already opened.");
@@ -98,13 +111,15 @@ const ChatRoom = () => {
         const index = chatBoxes.findIndex(({ key }) => key === activeKey);
         const newChatBoxes = chatBoxes.filter(({ key }) => key !== targetKey);
         setChatBoxes(newChatBoxes);
-        return activeKey? activeKey === targetKey? index === 0? '': chatBoxes[index - 1].key : activeKey: '';
+        return activeKey
+            ? activeKey === targetKey
+                ? index === 0
+                    ? ''
+                    : chatBoxes[index - 1].key
+                : activeKey
+            : '';
     };
-    const extractChat = (friend) => {
-        return renderChat(
-            messages.filter(({ name, body }) => name === friend || name === me)
-        );
-    };
+
     return (
         <>
             <Title name={me} />
@@ -124,6 +139,7 @@ const ChatRoom = () => {
                 }}
                 items={chatBoxes}
             />
+
             <ChatModal
                 setActiveKey={setActiveKey}
                 open={modalOpen}
@@ -157,9 +173,11 @@ const ChatRoom = () => {
                         setBody('');
                         return;
                     }
+
                     sendMessage({ name: me, to: username, body: msg });
                     setBody('');
                     setMsgSent(true);
+                    extractChat(username);
                 }}
             ></Input.Search>
         </>

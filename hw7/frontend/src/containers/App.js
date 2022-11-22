@@ -22,9 +22,6 @@ const App = () => {
         displayStatus(status);
     }, [status]);
 
-    useEffect(() => {
-        console.log(messages);
-    }, [messages]);
 
     return <Wrapper>{signedIn ? <ChatRoom /> : <SignIn me={me} />}</Wrapper>;
 };
