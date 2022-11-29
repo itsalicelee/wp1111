@@ -26,7 +26,7 @@ const SearchPage = () => {
                     priceFilter: state.priceFilter,
                     mealFilter: state.mealFilter,
                     typeFilter: state.typeFilter,
-                    sortByFilter: state.sortByFilter,
+                    sortBy: state.sortBy,
                 },
             });
             // console.log('data', data.contents);

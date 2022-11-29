@@ -19,7 +19,7 @@ exports.GetCommentsByRestaurantId = async (req, res) => {
         if (err) {
             res.status(403).send({ message: 'error', contents: [] });
         } else {
-            console.log("get comment", data);
+            console.log('get comment', data);
             res.status(200).send({ message: 'success', contents: data });
         }
     });
@@ -42,4 +42,18 @@ exports.CreateComment = async (req, res) => {
     const body = req.body;
     /****************************************/
     // TODO Part III-3-b: create a new comment to a restaurant
+    const { restaurantId, name, rating, content } = body;
+
+    try {
+        const comment = new Comment({
+            restaurantId: restaurantId,
+            name: name,
+            rating: rating,
+            content: content,
+        });
+        await comment.save();
+        res.status(200).send({ message: 'success', contents: comment });
+    } catch (err) {
+        console.log(err);
+    }
 };
