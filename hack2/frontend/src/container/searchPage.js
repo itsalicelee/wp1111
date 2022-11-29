@@ -29,7 +29,7 @@ const SearchPage = () => {
                     sortByFilter: state.sortByFilter,
                 },
             });
-            console.log('data', data.contents);
+            // console.log('data', data.contents);
             setRestaurant(data.contents);
         } catch (err) {
             console.log(err);

@@ -19,10 +19,11 @@ exports.GetCommentsByRestaurantId = async (req, res) => {
         if (err) {
             res.status(403).send({ message: 'error', contents: [] });
         } else {
-            console.log(data);
+            console.log("get comment", data);
             res.status(200).send({ message: 'success', contents: data });
         }
     });
+
     // NOTE USE THE FOLLOWING FORMAT. Send type should be
     // if success:
     // {
