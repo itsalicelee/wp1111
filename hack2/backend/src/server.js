@@ -34,8 +34,16 @@ const dboptions = {
 }
 
 // TODO Part I-3: check .env exists
+if (!process.env.MONGO_URL) {
+    console.error('Missing MONGO_URL!');
+    process.exit(1);
+}
 
-mongoose.connect(
+
+mongoose.connect(process.env.MONGO_URL, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true
+    }
     // TODO Part I-3: connect the backend to mongoDB
 ).then(async res => {
     if (process.env.MODE === 'Reset') {

@@ -24,9 +24,41 @@ const RestaurantPage = () => {
     const [loading, setLoading] = useState(true)
     const getInfo = async () => {
         // TODO Part III-2: get a restaurant's info
+          try {
+              const { data } = await axios.get(
+                  'http://localhost:4000/api/getInfo',
+                  {
+                      params: {
+                          id: id
+                      },
+                  }
+              );
+              console.log('info', data.contents);
+              setInfo(...data.contents);
+          } catch (err) {
+              console.log(err);
+          }
     }
     const getComments = async () => {
-        // TODO Part III-3: get a restaurant's comments 
+        // TODO Part III-3: get a restaurant's comments
+        // TODO Part III-2: get a restaurant's info
+        try {
+            const { data } = await axios.get(
+                'http://localhost:4000/api/getCommentsByRestaurantId',
+                {
+                    params: {
+                        params: {
+                            comments: comments
+                        }
+                    },
+                }
+            );
+            setComments(...data.contents);
+            console.log('comment', data.contents);
+            
+        } catch (err) {
+            console.log(err);
+        }
     }
     useEffect(() => {
         if (Object.keys(info).length === 0) {
@@ -36,10 +68,16 @@ const RestaurantPage = () => {
     
     useEffect(() => {
         // TODO Part III-3-c: update the comment display immediately after submission
+        setComments(comments);
     }, [comments])
 
     /* TODO Part III-2-b: calculate the average rating of the restaurant */
     let rating = 0;
+    for(let i = 0; i < info.length; i++){
+        rating += info.rating;
+    }
+    rating = rating / info.length;
+    console.log("rating", rating);
     
     return (
         <div className='restaurantPageContainer'>
