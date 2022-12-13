@@ -1,0 +1,28 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "dotenv-defaults": "^5.0.2",
+        "graphql": "^16.6.0",
+        "graphql-ws": "^5.11.2",
+        "graphql-yoga": "^3.1.1",
+        "mongoose": "^6.8.0",
+        "ws": "^8.11.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.19.3",
+        "@babel/core": "^7.20.5",
+        "@babel/node": "^7.20.5",
+        "@babel/plugin-proposal-class-properties": "^7.18.6",
+        "@babel/plugin-proposal-object-rest-spread": "^7.20.2",
+        "@babel/plugin-transform-arrow-functions": "^7.18.6",
+        "@babel/preset-env": "^7.20.2",
+        "nodemon": "^2.0.20",
+        "uuidv4": "^6.2.13"
+    },
+    "scripts": {
+        "server": "nodemon src/index.js --ext js --exec babel-node"
+    }
+}
