@@ -25,7 +25,10 @@ const ScoreCardProvider = (props) => {
     };
 
     const addRegularMessage = (...ms) => {
-        setMessages([...messages, ...ms.map((m) => makeMessage(m, REGULAR_MESSAGE_COLOR))]);
+        setMessages([
+            ...messages,
+            ...ms.map((m) => makeMessage(m, REGULAR_MESSAGE_COLOR)),
+        ]);
     };
 
     const addErrorMessage = (message) => {
@@ -33,7 +36,7 @@ const ScoreCardProvider = (props) => {
     };
 
     const clearMessage = () => {
-        setMessages([]);
+        setMessages([makeMessage('Database Cleared', REGULAR_MESSAGE_COLOR)]);
     };
 
     return (
