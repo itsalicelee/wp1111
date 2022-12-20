@@ -40,11 +40,12 @@ function Row({
   };
 
   const handleSubmitEdit = (formData) => {
+    console.log(formData);
     updateItem({
       variables: {
         // TODO 4 Use `updateItem` and pass the correct variables
         input: {
-          id: formData.id,
+          id: item.id,
           name: formData.name,
           amount: formData.amount,
           category: formData.category,
