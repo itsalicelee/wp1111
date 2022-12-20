@@ -24,7 +24,7 @@ type Item {
 
 type Query {
     items: [Item!]!
-}
+}           
 
 input CreateItemInput {
     id: ID!
