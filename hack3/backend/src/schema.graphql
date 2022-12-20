@@ -56,6 +56,6 @@ type Subscription {
     itemCreated: Item!
     itemUpdated: Item!
     # TODO 6.1 Define the schema for the deleteItem Subscription
-
+    itemDeleted: ID!
     # TODO 6.1 End
 }

@@ -27,5 +27,10 @@ export const ITEM_UPDATED_SUBSCRIPTION = gql`
 `;
 
 // TODO 6.4 Graphql of subscription
+export const ITEM_DELETED_SUBSCRIPTION = gql`
+    subscription ItemDeleted {
+        itemDeleted 
+    }
+`;
 
 // TODO 6.4 End

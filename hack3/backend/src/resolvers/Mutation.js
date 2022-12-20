@@ -37,22 +37,14 @@ const Mutation = {
     // TODO 5.2 Define the itemDelete mutation resolver
     // TODO 6.3 Publish itemDeleted
     deleteItem: async (parent, { id }, { itemModel, pubSub }) => {
-        console.log('id', id);
         const deletedItem = await itemModel.deleteOne({ id: id });
-        console.log(deletedItem);
-
 
         //  db.comments = db.comments.filter((comment) => comment.post !== args.id);
 
-        //  if (item.published) {
-        //      pubsub.publish('post', {
-        //          post: {
-        //              mutation: 'DELETED',
-        //              data: post,
-        //          },
-        //      });
-        //  }
-
+        pubSub.publish('ITEM_DELETED', {
+            itemDeleted: id,
+        });
+        console.log('delete item done!');
         return id;
     },
 
