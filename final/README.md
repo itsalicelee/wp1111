@@ -1,8 +1,3 @@
-# Report
-
-Status: In Progress
-Type: General
-
 # **[111-1] Web Programming Final**
 
 ## (**Group 22) Bus Error – 台灣的技術論壇 🚌**
